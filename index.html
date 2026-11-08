@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Devki Ruiru Senior School</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Website Icon (Favicon) -->
+ <link rel="icon" type="image/png" href="/Untitled.png">
+<link rel="shortcut icon" type="image/png" href="/Untitled.png">
+<meta name="theme-color" content="#3d1f1f">
+<style>
+:root{--primary-red:#c41e3a;--primary-red-dark:#a01830;--dark-brown:#3d1f1f;--darker-brown:#2a1515;--gold:#c9a227;--light-gold:#d4b84a;--text-dark:#1a1a1a;--text-gray:#666;--text-light:#f5f5f5;--bg-cream:#faf8f5;--bg-light:#f0ede8;}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+img,svg,video{max-width:100%}
+img{height:auto}
+body{font-family:'Inter',sans-serif;color:var(--text-dark);background:var(--bg-cream);overflow-x:hidden}
+body.menu-open{overflow:hidden}
+.top-bar{background:var(--darker-brown);color:var(--light-gold);padding:8px 0;font-size:12px;letter-spacing:1px}
+.top-bar-container{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
+.top-bar-left{display:flex;gap:24px;align-items:center}
+.top-bar-left span{display:flex;align-items:center;gap:6px}
+.top-bar-left svg{width:14px;height:14px;fill:var(--primary-red)}
+.top-bar-right{font-weight:600;letter-spacing:3px;text-transform:uppercase}
+.navbar{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;border-bottom:1px solid rgba(0,0,0,0.05)}
+.nav-container{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;height:72px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-img{height:48px;width:auto;object-fit:contain;transition:transform 0.3s ease}
+.logo:hover .logo-img{transform:scale(1.05)}
+.logo-text h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);line-height:1.2}
+.logo-text span{font-size:10px;letter-spacing:3px;color:var(--primary-red);font-weight:600;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links a.draw-underline{text-decoration:none;color:var(--text-dark);font-size:14px;font-weight:500;position:relative;padding-bottom:4px;transition:color 0.3s}
+.nav-links a:hover,.nav-links a.active{color:var(--primary-red)}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--primary-red)}
+.btn-primary{background:var(--primary-red);color:white;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:14px;font-weight:600;transition:all 0.3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--primary-red-dark);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:white;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:14px;font-weight:600;transition:all 0.3s;border:1.5px solid rgba(255,255,255,0.4);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{background:rgba(255,255,255,0.1);border-color:white}
+.btn-dark{background:var(--dark-brown);color:white;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:14px;font-weight:600;transition:all 0.3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-dark:hover{background:var(--darker-brown)}
+.mobile-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1002;position:relative}
+.mobile-menu-btn span{display:block;width:24px;height:2px;background:var(--text-dark);margin:5px 0;transition:all 0.3s ease;border-radius:1px}
+.mobile-menu-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.mobile-menu-btn.active span:nth-child(2){opacity:0}
+.mobile-menu-btn.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:998;opacity:0;visibility:hidden;transition:all 0.3s ease}
+.mobile-nav-overlay.active{opacity:1;visibility:visible}
+.mobile-nav{position:fixed;top:0;right:-100%;width:300px;max-width:85vw;height:100vh;background:white;z-index:999;padding:100px 32px 32px;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:-10px 0 40px rgba(0,0,0,0.15);overflow-y:auto}
+.mobile-nav.active{right:0}
+.mobile-nav ul{list-style:none}
+.mobile-nav ul li{margin-bottom:4px}
+.mobile-nav ul li a{display:block;padding:14px 0;color:var(--text-dark);text-decoration:none;font-size:16px;font-weight:500;border-bottom:1px solid rgba(0,0,0,0.06);transition:all 0.3s}
+.mobile-nav ul li a:hover{color:var(--primary-red);padding-left:8px}
+.mobile-nav .btn-primary{display:flex;justify-content:center;margin-top:20px;width:100%}
+.mobile-nav-contact{margin-top:32px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.08)}
+.mobile-nav-contact p{font-size:13px;color:var(--text-gray);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.mobile-nav-contact svg{width:16px;height:16px;fill:var(--primary-red);flex-shrink:0}
+.hero{position:relative;height:90vh;min-height:600px;display:flex;align-items:center;overflow:hidden}
+.hero-slider{position:absolute;inset:0;z-index:1}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease-in-out}
+.hero-slide.active{opacity:1}
+.hero-slide::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(61,31,31,0.88) 0%,rgba(42,21,21,0.78) 50%,rgba(61,31,31,0.85) 100%);z-index:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover}
+.slide-indicators{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:12px}
+.slide-dot{width:40px;height:4px;background:rgba(255,255,255,0.3);border-radius:2px;cursor:pointer;transition:all 0.3s;border:none}
+.slide-dot.active{background:var(--gold);width:60px}
+.slide-dot:hover{background:rgba(255,255,255,0.6)}
+.slide-arrows{position:absolute;top:50%;transform:translateY(-50%);z-index:10;display:flex;justify-content:space-between;width:100%;padding:0 30px;pointer-events:none}
+.slide-arrow{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);color:white;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;pointer-events:all;font-size:20px}
+.slide-arrow:hover{background:var(--primary-red);border-color:var(--primary-red);transform:scale(1.1)}
+.hero-content{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 24px;width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);padding:8px 20px;border-radius:30px;color:white;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;border:1px solid rgba(255,255,255,0.2);opacity:0;transform:translateY(30px);animation:fadeInUp 0.8s ease forwards 0.3s}
+.hero-badge svg{width:16px;height:16px;fill:var(--gold)}
+.hero h2{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,72px);color:white;line-height:1.1;margin-bottom:20px;max-width:700px;opacity:0;transform:translateY(40px);animation:fadeInUp 1s ease forwards 0.6s}
+.hero h2 .gold{color:var(--gold)}
+.hero h2 .red{color:var(--primary-red)}
+.hero p{color:rgba(255,255,255,0.85);font-size:18px;line-height:1.7;max-width:600px;margin-bottom:36px;opacity:0;transform:translateY(30px);animation:fadeInUp 0.9s ease forwards 0.9s}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;opacity:0;transform:translateY(30px);animation:fadeInUp 0.9s ease forwards 1.2s}
+.quick-links{position:relative;z-index:10;margin-top:-80px;padding:0 24px}
+.quick-links-container{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.quick-card{background:white;border-radius:16px;padding:28px;box-shadow:0 10px 40px rgba(0,0,0,0.08);transition:all 0.3s;border:1px solid rgba(0,0,0,0.04);text-decoration:none;color:inherit;display:block}
+.quick-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.12)}
+.quick-card-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--dark-brown),var(--primary-red));border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;margin-bottom:16px;font-size:20px}
+.quick-card h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:6px;color:var(--text-dark)}
+.quick-card p{font-size:14px;color:var(--text-gray);margin-bottom:16px;line-height:1.5}
+.quick-card .quick-link-arrow{color:var(--primary-red);font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;transition:gap 0.3s}
+.quick-card:hover .quick-link-arrow{gap:10px}
+.welcome{padding:100px 24px 80px;background:var(--bg-cream)}
+.welcome-container{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.welcome-label{color:var(--primary-red);font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.welcome h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);line-height:1.15;margin-bottom:20px;color:var(--text-dark)}
+.welcome p{color:var(--text-gray);line-height:1.8;margin-bottom:16px;font-size:16px}
+.welcome-images{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:500px}
+.welcome-img{border-radius:16px;overflow:hidden;position:relative}
+.welcome-img img{width:100%;height:100%;object-fit:cover;display:block}
+.welcome-container,.welcome-text,.welcome-images,.welcome-img{min-width:0;max-width:100%}
+.welcome h2,.welcome p,.mobile-nav-contact p,.footer p{overflow-wrap:anywhere;word-break:normal}
+.welcome-img:nth-child(1){grid-row:span 1}
+.welcome-img:nth-child(2){grid-row:span 1}
+.welcome-img:nth-child(3){grid-column:span 2;grid-row:span 1}
+.core-values{background:linear-gradient(135deg,var(--darker-brown) 0%,var(--dark-brown) 100%);padding:100px 24px;color:white}
+.core-values-container{max-width:1280px;margin:0 auto}
+.core-values-label{color:var(--gold);font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.core-values h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);margin-bottom:48px;max-width:600px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.value-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;transition:all 0.3s}
+.value-card:hover{background:rgba(255,255,255,0.08);transform:translateY(-2px)}
+.value-icon{width:44px;height:44px;background:var(--primary-red);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px}
+.value-card h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:8px}
+.value-card p{color:rgba(255,255,255,0.7);font-size:14px;line-height:1.6}
+.principal{padding:100px 24px;background:var(--bg-cream)}
+.principal-container{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.principal-img{position:relative;display:flex;justify-content:center;align-items:center}
+.principal-img-wrapper{position:relative;width:100%;max-width:400px;aspect-ratio:3/4;border-radius:20px;overflow:hidden;z-index:2;background:var(--dark-brown)}
+.principal-img-wrapper img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.principal-img::before{content:'';position:absolute;top:-16px;left:-16px;right:16px;bottom:16px;background:var(--primary-red);border-radius:20px;z-index:1}
+.principal-label{color:var(--primary-red);font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.principal h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,36px);line-height:1.3;margin-bottom:20px;color:var(--text-dark)}
+.principal p{color:var(--text-gray);line-height:1.8;margin-bottom:16px;font-size:16px}
+.principal p em{color:var(--gold);font-style:italic}
+.principal-name{margin-top:24px}
+.principal-name h4{font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark)}
+.principal-name span{color:var(--text-gray);font-size:14px}
+.stats{background:linear-gradient(90deg,var(--darker-brown) 0%,var(--dark-brown) 50%,var(--primary-red-dark) 100%);padding:60px 24px;color:white}
+.stats-container{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}
+.stat-item h3{font-family:'Playfair Display',serif;font-size:clamp(36px,4vw,56px);margin-bottom:8px;line-height:1}
+.stat-item span{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);font-weight:500}
+.life-at-devki{padding:100px 24px;background:var(--bg-cream)}
+.life-container{max-width:1280px;margin:0 auto}
+.life-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.life-label{color:var(--primary-red);font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.life-header h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);line-height:1.15;max-width:500px}
+.life-header a{color:var(--primary-red);text-decoration:none;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;transition:gap 0.3s}
+.life-header a:hover{gap:10px}
+.life-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.life-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:all 0.3s;text-decoration:none;color:inherit;display:block}
+.life-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.1)}
+.life-card-img{height:220px;position:relative;overflow:hidden}
+.life-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.life-card:hover .life-card-img img{transform:scale(1.05)}
+.life-tag{position:absolute;top:16px;left:16px;background:var(--primary-red);color:white;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.life-card-content{padding:24px}
+.life-card-content h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;color:var(--text-dark)}
+.life-card-content p{color:var(--text-gray);font-size:14px;line-height:1.6}
+.cta{position:relative;padding:120px 24px;background:linear-gradient(135deg,rgba(61,31,31,0.95) 0%,rgba(42,21,21,0.9) 100%),url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80') center/cover;background-attachment:fixed}
+.cta-container{max-width:1280px;margin:0 auto;position:relative;z-index:2}
+.cta h2{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,64px);color:white;margin-bottom:16px}
+.cta h2 .gold{color:var(--gold)}
+.cta h2 .red{color:var(--primary-red)}
+.cta p{color:rgba(255,255,255,0.8);font-size:18px;max-width:600px;margin-bottom:32px;line-height:1.6}
+.cta-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.footer{background:var(--darker-brown);color:white;padding:80px 24px 30px}
+.footer-container{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.footer-brand h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px}
+.footer-brand span{color:var(--gold);font-size:11px;letter-spacing:3px;text-transform:uppercase}
+.footer-brand p{color:rgba(255,255,255,0.6);font-size:14px;line-height:1.7;margin:16px 0;max-width:280px}
+.footer-brand .footer-logo-img{height:64px;width:auto;object-fit:contain;margin-bottom:16px;filter:brightness(0) invert(1);transition:transform 0.3s ease}
+.footer-brand:hover .footer-logo-img{transform:scale(1.05)}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:36px;height:36px;border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);text-decoration:none;transition:all 0.3s;font-size:14px}
+.footer-social a:hover{background:var(--primary-red);border-color:var(--primary-red);color:white}
+.footer-col h4{color:var(--gold);font-size:16px;margin-bottom:20px;font-family:'Playfair Display',serif}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul li a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:14px;transition:color 0.3s;display:flex;align-items:center;gap:8px}
+.footer-col ul li a:hover{color:white}
+.footer-col ul li a svg{width:14px;height:14px;fill:var(--primary-red);flex-shrink:0}
+.footer-contact li{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:14px}
+.footer-contact svg{width:16px;height:16px;fill:var(--primary-red);margin-top:2px;flex-shrink:0}
+.footer-bottom{max-width:1280px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{color:rgba(255,255,255,0.5);font-size:13px}
+.footer-motto{color:var(--gold);font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:600}
+@media(max-width:1024px){.quick-links-container{grid-template-columns:repeat(2,1fr)}.values-grid{grid-template-columns:repeat(2,1fr)}.footer-container{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.nav-links{display:none}.mobile-menu-btn{display:block}.top-bar-left{display:none}.hero{height:auto;padding:100px 0}.quick-links-container{grid-template-columns:1fr}.welcome-container,.principal-container{grid-template-columns:1fr}.welcome-images{height:350px}.values-grid{grid-template-columns:1fr}.stats-container{grid-template-columns:repeat(2,1fr)}.life-grid{grid-template-columns:1fr}.life-header{flex-direction:column;align-items:flex-start;gap:16px}.footer-container{grid-template-columns:1fr;gap:40px}.footer-bottom{flex-direction:column;gap:12px;text-align:center}.slide-arrows{display:none}.principal-img-wrapper{max-width:280px;aspect-ratio:1/1}.logo-img{height:40px}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+.animate-in{animation:fadeInUp 0.8s ease forwards}
+.animate-left{animation:fadeInLeft 0.8s ease forwards}
+.animate-right{animation:fadeInRight 0.8s ease forwards}
+.animate-scale{animation:scaleIn 0.8s ease forwards}
+.delay-1{animation-delay:0.1s}
+.delay-2{animation-delay:0.2s}
+.delay-3{animation-delay:0.3s}
+.delay-4{animation-delay:0.4s}
+.delay-5{animation-delay:0.5s}
+.delay-6{animation-delay:0.6s}
+.shimmer-text{background:linear-gradient(90deg,var(--gold) 0%,#fff 50%,var(--gold) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+.float-icon{animation:float 3s ease-in-out infinite}
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.8s ease}
+.reveal.active{opacity:1;transform:translateY(0)}
+.stagger-children>*{opacity:0;transform:translateY(20px)}
+.stagger-children.active>*:nth-child(1){animation:fadeInUp 0.6s ease forwards 0.1s}
+.stagger-children.active>*:nth-child(2){animation:fadeInUp 0.6s ease forwards 0.2s}
+.stagger-children.active>*:nth-child(3){animation:fadeInUp 0.6s ease forwards 0.3s}
+.stagger-children.active>*:nth-child(4){animation:fadeInUp 0.6s ease forwards 0.4s}
+.stagger-children.active>*:nth-child(5){animation:fadeInUp 0.6s ease forwards 0.5s}
+.stagger-children.active>*:nth-child(6){animation:fadeInUp 0.6s ease forwards 0.6s}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(196,30,58,0.4)}50%{box-shadow:0 0 20px 10px rgba(196,30,58,0)}}
+.btn-primary{animation:pulseGlow 2s ease-in-out infinite}
+@keyframes rotateIn{from{opacity:0;transform:rotate(-10deg) scale(0.9)}to{opacity:1;transform:rotate(0) scale(1)}}
+.rotate-in{animation:rotateIn 0.8s ease forwards}
+@keyframes bounceIn{0%{opacity:0;transform:scale(0.3)}50%{transform:scale(1.05)}70%{transform:scale(0.9)}100%{opacity:1;transform:scale(1)}}
+.bounce-in{animation:bounceIn 0.8s ease forwards}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+.slide-left{animation:slideInLeft 0.8s ease forwards}
+@keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+.slide-right{animation:slideInRight 0.8s ease forwards}
+@keyframes flipIn{from{opacity:0;transform:perspective(400px) rotateY(90deg)}to{opacity:1;transform:perspective(400px) rotateY(0)}}
+.flip-in{animation:flipIn 0.8s ease forwards}
+@keyframes zoomBlur{from{opacity:0;transform:scale(0.5);filter:blur(10px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
+.zoom-blur{animation:zoomBlur 0.8s ease forwards}
+@keyframes wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.wave-text span{display:inline-block;animation:wave 1s ease-in-out infinite}
+.wave-text span:nth-child(1){animation-delay:0s}
+.wave-text span:nth-child(2){animation-delay:0.1s}
+.wave-text span:nth-child(3){animation-delay:0.2s}
+.wave-text span:nth-child(4){animation-delay:0.3s}
+.wave-text span:nth-child(5){animation-delay:0.4s}
+@keyframes gradientBorder{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.gradient-border{position:relative;background:linear-gradient(60deg,var(--primary-red),var(--gold),var(--dark-brown),var(--primary-red));background-size:300% 300%;animation:gradientBorder 3s ease infinite;padding:3px;border-radius:20px}
+.magnetic{transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94)}
+.magnetic:hover{transform:scale(1.05) translateY(-5px)}
+.tilt-card{transition:transform 0.3s ease,box-shadow 0.3s ease;transform-style:preserve-3d}
+.tilt-card:hover{transform:rotateX(5deg) rotateY(5deg) translateY(-10px);box-shadow:0 25px 50px rgba(0,0,0,0.15)}
+.scroll-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--primary-red),var(--gold));z-index:9999;transition:width 0.1s}
+.parallax-img{transform:translateZ(0);will-change:transform}
+.text-reveal{overflow:hidden}
+.text-reveal span{display:inline-block;transform:translateY(100%);opacity:0;transition:all 0.6s ease}
+.text-reveal.active span{transform:translateY(0);opacity:1}
+@keyframes glowText{0%,100%{text-shadow:0 0 10px rgba(201,162,39,0.5),0 0 20px rgba(201,162,39,0.3)}50%{text-shadow:0 0 20px rgba(201,162,39,0.8),0 0 40px rgba(201,162,39,0.5)}}
+.glow-text{animation:glowText 2s ease-in-out infinite}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+.ripple{position:relative;overflow:hidden}
+.ripple::after{content:'';position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,0.3) 10%,transparent 10.01%);background-repeat:no-repeat;background-position:50%;transform:scale(10);opacity:0;transition:transform 0.5s,opacity 0.5s}
+.ripple:active::after{transform:scale(0);opacity:0.3;transition:0s}
+@keyframes skeleton{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:skeleton 1.5s infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.1)}28%{transform:scale(1)}42%{transform:scale(1.1)}70%{transform:scale(1)}}
+.heartbeat{animation:heartbeat 1.5s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(0deg)}20%{transform:rotate(5deg)}40%{transform:rotate(-3deg)}60%{transform:rotate(2deg)}80%{transform:rotate(-1deg)}}
+.swing{animation:swing 2s ease-in-out infinite;transform-origin:top center}
+@keyframes jelly{0%,100%{transform:scale(1,1)}25%{transform:scale(0.9,1.1)}50%{transform:scale(1.1,0.9)}75%{transform:scale(0.95,1.05)}}
+.jelly:hover{animation:jelly 0.5s ease}
+@keyframes particleBurst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.marquee{animation:marquee 20s linear infinite}
+@keyframes cardFlip{0%{transform:rotateY(0)}50%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
+.card-flip{animation:cardFlip 3s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes neonFlicker{0%,100%{opacity:1}50%{opacity:0.8}52%{opacity:0.3}54%{opacity:0.9}56%{opacity:0.5}58%{opacity:1}}
+.neon-flicker{animation:neonFlicker 3s ease-in-out infinite}
+@keyframes dustFloat{0%,100%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}50%{transform:translateY(-100px) translateX(50px)}}
+.dust-particle{position:absolute;width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:0;animation:dustFloat 8s ease-in-out infinite}
+@keyframes drawLine{from{width:0}to{width:100%}}
+.draw-underline{position:relative;display:inline-block}
+.draw-underline::after{content:'';position:absolute;bottom:-4px;left:0;height:2px;width:0;background:var(--primary-red);transition:width 0.4s ease}
+.draw-underline:hover::after{width:100%}
+@keyframes imageReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.img-reveal{animation:imageReveal 1s ease forwards}
+@keyframes counterRoll{0%{transform:translateY(100%);opacity:0}100%{transform:translateY(0);opacity:1}}
+.counter-roll{animation:counterRoll 0.6s ease forwards}
+@keyframes scrollBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+.scroll-bounce{animation:scrollBounce 1.5s ease-in-out infinite}
+
+/* ============================================ */
+/* ENHANCED MOBILE RESPONSIVENESS               */
+/* ============================================ */
+
+/* Large tablets and small laptops */
+@media(max-width:1024px){
+    .quick-links-container{grid-template-columns:repeat(2,1fr)}
+    .values-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-container{grid-template-columns:repeat(2,1fr)}
+    .welcome-container{gap:40px}
+    .principal-container{gap:40px}
+}
+
+/* Tablets */
+@media(max-width:900px){
+    .life-grid{grid-template-columns:repeat(2,1fr)}
+    .stats-container{grid-template-columns:repeat(2,1fr);gap:30px}
+    .welcome-images{height:400px}
+}
+
+/* Mobile phones */
+@media(max-width:768px){
+    .nav-links{display:none}
+    .mobile-menu-btn{display:block}
+    .top-bar-left{display:none}
+
+    /* Hero mobile fixes */
+    .hero{height:auto;min-height:500px;padding:80px 0 100px}
+    .hero h2{font-size:clamp(28px,8vw,40px);line-height:1.2}
+    .hero p{font-size:16px;line-height:1.6;max-width:100%}
+    .hero-buttons{flex-direction:column;gap:12px}
+    .hero-buttons .btn-primary,
+    .hero-buttons .btn-outline{width:100%;justify-content:center;text-align:center}
+    .hero-badge{font-size:11px;padding:6px 14px}
+    .slide-arrows{display:none}
+    .slide-indicators{bottom:20px}
+    .slide-dot{width:30px;height:3px}
+    .slide-dot.active{width:45px}
+
+    /* Quick links */
+    .quick-links{margin-top:-50px;padding:0 16px}
+    .quick-links-container{grid-template-columns:1fr;gap:14px}
+    .quick-card{padding:22px}
+    .quick-card h3{font-size:18px}
+
+    /* Welcome section */
+    .welcome{padding:60px 16px 50px}
+    .welcome-container{grid-template-columns:1fr;gap:30px}
+    .welcome h2{font-size:clamp(26px,6vw,32px)}
+    .welcome p{font-size:15px}
+    .welcome-images{width:100%;height:auto;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(3,200px);gap:10px}
+    .welcome-img{width:100%;min-width:0}
+    .welcome-img img{width:100%;height:100%;object-fit:cover}
+    .welcome-img:nth-child(1),
+    .welcome-img:nth-child(2),
+    .welcome-img:nth-child(3){grid-column:span 1;grid-row:span 1}
+
+    /* Core values */
+    .core-values{padding:60px 16px}
+    .core-values h2{font-size:clamp(26px,6vw,32px);margin-bottom:32px}
+    .values-grid{grid-template-columns:1fr;gap:14px}
+    .value-card{padding:24px}
+    .value-card h3{font-size:18px}
+    .value-card p{font-size:13px}
+
+    /* Principal sections */
+    .principal{padding:60px 16px}
+    .principal-container{grid-template-columns:1fr;gap:30px}
+    .principal h2{font-size:clamp(22px,5vw,28px)}
+    .principal p{font-size:15px;line-height:1.7}
+    .principal-img-wrapper{max-width:280px;aspect-ratio:1/1;margin:0 auto}
+    .principal-img::before{top:-10px;left:-10px;right:10px;bottom:10px}
+    .principal-name{text-align:center}
+
+    /* Deputy principal - reverse order on mobile */
+    #deputy-principal .principal-container{
+        display:flex;
+        flex-direction:column-reverse;
+    }
+
+    /* Stats */
+    .stats{padding:40px 16px}
+    .stats-container{grid-template-columns:1fr 1fr;gap:24px}
+    .stat-item h3{font-size:clamp(32px,8vw,42px)}
+    .stat-item span{font-size:11px;letter-spacing:2px}
+
+    /* Life at Devki */
+    .life-at-devki{padding:60px 16px}
+    .life-grid{grid-template-columns:1fr;gap:18px}
+    .life-header{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:32px}
+    .life-header h2{font-size:clamp(26px,6vw,32px)}
+    .life-card-img{height:180px}
+    .life-card-content{padding:18px}
+    .life-card-content h3{font-size:16px}
+    .life-card-content p{font-size:13px}
+
+    /* CTA */
+    .cta{padding:80px 16px}
+    .cta h2{font-size:clamp(28px,7vw,40px)}
+    .cta p{font-size:16px}
+    .cta-buttons{flex-direction:column;gap:12px}
+    .cta-buttons .btn-primary,
+    .cta-buttons .btn-outline{width:100%;justify-content:center}
+
+    /* Footer */
+    .footer{padding:50px 16px 24px}
+    .footer-container{grid-template-columns:1fr;gap:32px;margin-bottom:40px}
+    .footer-brand{text-align:center}
+    .footer-brand p{margin:12px auto;max-width:100%}
+    .footer-social{justify-content:center}
+    .footer-col h4{font-size:15px;margin-bottom:14px}
+    .footer-col ul li a{font-size:13px}
+    .footer-bottom{flex-direction:column;gap:10px;text-align:center;padding-top:20px}
+    .footer-bottom p{font-size:12px}
+    .footer-motto{font-size:11px}
+
+    /* Preloader */
+    #preloader img{height:100px}
+    #preloader h2{font-size:22px}
+    #preloader h2 span{font-size:12px}
+
+    /* General touch improvements */
+    .btn-primary, .btn-outline, .btn-dark{
+        padding:14px 24px;
+        min-height:48px;
+        font-size:15px;
+    }
+    .slide-arrow{width:44px;height:44px}
+
+    /* Reduce animations on mobile for performance */
+    .dust-particle{display:none}
+    .float-icon{animation:none}
+    .wave-text span{animation:none}
+    .shimmer-text{animation:none;-webkit-text-fill-color:var(--gold)}
+    .neon-flicker{animation:none}
+    .glow-text{animation:none}
+    .btn-primary{animation:none}
+
+    /* Better spacing */
+    section{padding-left:16px !important;padding-right:16px !important}
+    .nav-container{padding:0 16px}
+    .top-bar-container{padding:0 16px}
+    .hero-content{padding:0 16px}
+    .quick-links-container,
+    .welcome-container,
+    .core-values-container,
+    .principal-container,
+    .stats-container,
+    .life-container,
+    .cta-container,
+    .footer-container,
+    .footer-bottom{max-width:100%}
+}
+
+/* Small phones */
+@media(max-width:480px){
+    .hero{min-height:420px;padding:60px 0 80px}
+    .hero h2{font-size:26px}
+    .hero p{font-size:14px}
+    .hero-badge{font-size:10px;padding:5px 12px}
+
+    .quick-card{padding:18px}
+    .quick-card-icon{width:40px;height:40px;font-size:18px}
+    .quick-card h3{font-size:16px}
+    .quick-card p{font-size:13px}
+
+    .welcome-images{grid-template-rows:repeat(3,160px)}
+
+    .value-card{padding:20px}
+    .value-icon{width:38px;height:38px;font-size:16px}
+
+    .stats-container{grid-template-columns:1fr 1fr;gap:16px}
+    .stat-item h3{font-size:32px}
+
+    .life-card-img{height:160px}
+
+    .principal-img-wrapper{max-width:240px}
+
+    .footer-brand .footer-logo-img{height:48px}
+
+    .logo-img{height:36px}
+    .logo-text h1{font-size:15px}
+    .logo-text span{font-size:9px;letter-spacing:2px}
+
+    .mobile-nav{width:280px;padding:90px 24px 24px}
+    .mobile-nav ul li a{font-size:15px;padding:12px 0}
+}
+
+/* Very small phones */
+@media(max-width:360px){
+    .hero h2{font-size:24px}
+    .stats-container{grid-template-columns:1fr;gap:20px}
+    .stat-item h3{font-size:36px}
+}
+
+/* Landscape mode on phones */
+@media(max-height:500px) and (orientation:landscape){
+    .hero{min-height:300px;height:auto;padding:60px 0}
+    .hero h2{font-size:28px}
+    .slide-indicators{bottom:15px}
+    .quick-links{margin-top:-30px}
+    .mobile-nav{padding-top:80px}
+}
+
+/* Reduce motion for users who prefer it */
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        animation-duration:0.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:0.01ms !important;
+    }
+    .hero-slide{transition:none}
+    .reveal{opacity:1;transform:none}
+}
+</style>
+ <link rel="shortcut icon" type="image/png" href="/Untitled.png">
+ <meta name="theme-color" content="#3d1f1f">
+</head>
+<body>
+<div id="preloader" style="position:fixed;inset:0;background:linear-gradient(135deg,var(--darker-brown) 0%,var(--dark-brown) 100%);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s ease;">
+<div style="position:relative;">
+<img src="Untitled.png" alt="The Devki Ruiru Senior School Logo" style="height:140px;width:auto;object-fit:contain;animation:pulseGlow 2s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(201,162,39,0.3));">
+</div>
+<h2 style="font-family:'Playfair Display',serif;color:var(--gold);margin-top:24px;font-size:28px;letter-spacing:2px;text-align:center;">The Devki Ruiru<br><span style="font-size:14px;letter-spacing:4px;color:rgba(255,255,255,0.7);text-transform:uppercase;">Senior School</span></h2>
+<div style="margin-top:32px;width:200px;height:3px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;">
+<div id="preloader-bar" style="width:0%;height:100%;background:linear-gradient(90deg,var(--primary-red),var(--gold));border-radius:3px;transition:width 0.3s ease;"></div>
+</div>
+<p style="margin-top:16px;color:rgba(255,255,255,0.5);font-size:12px;letter-spacing:3px;text-transform:uppercase;">Loading Experience...</p>
+</div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-left">
+<span><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>+254 798593187</span>
+<span><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>devkiruirusecexam1@gmail.com</span>
+</div>
+<div class="top-bar-right">Motto &middot; Ignite Your Future</div>
+</div>
+</div>
+
+<nav class="navbar">
+<div class="nav-container">
+<a href="#home" class="logo">
+<img src="Untitled.png" alt="The Devki Ruiru Senior devkiruirusecexam1@gmail.com" class="logo-img">
+<div class="logo-text"><h1>The Devki Ruiru</h1><span>Senior School</span></div>
+</a>
+<ul class="nav-links">
+<li><a href="#home" class="active">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="news.html">News</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="admissions.html" class="btn-primary ripple">Apply Now</a></li>
+</ul>
+<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</div>
+</nav>
+
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="mobile-nav" id="mobileNav">
+<ul>
+<li><a href="#home" class="mobile-nav-link">Home</a></li>
+<li><a href="about.html" class="mobile-nav-link">About</a></li>
+<li><a href="academics.html" class="mobile-nav-link">Academics</a></li>
+<li><a href="admissions.html" class="mobile-nav-link">Admissions</a></li>
+<li><a href="news.html" class="mobile-nav-link">News</a></li>
+<li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+</ul>
+<a href="admissions.html" class="btn-primary ripple">Apply Now</a>
+<div class="mobile-nav-contact">
+<p><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>+254 798593187</p>
+<p><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>devkiruirusecexam1@gmail.com</p>
+</div>
+</div>
+
+<section class="hero" id="home">
+<div class="hero-slider">
+<div class="hero-slide active parallax-img"><img src="SCHOOL GATE.jpeg" alt="Students learning"></div>
+<div class="hero-slide parallax-img"><img src="aerialorg.jpeg" alt="Classroom"></div>
+<div class="hero-slide parallax-img"><img src="school parade.jpeg" alt="Library study"></div>
+<div class="hero-slide parallax-img"><img src="comp.jpeg" alt="Science lab"></div>
+<div class="hero-slide parallax-img"><img src="phase1.jpeg" alt="Graduation"></div>
+</div>
+<div class="slide-arrows">
+<button class="slide-arrow" id="prevSlide" aria-label="Previous slide">&#8249;</button>
+<button class="slide-arrow" id="nextSlide" aria-label="Next slide">&#8250;</button>
+</div>
+<div class="slide-indicators">
+<button class="slide-dot active" data-slide="0" aria-label="Slide 1"></button>
+<button class="slide-dot" data-slide="1" aria-label="Slide 2"></button>
+<button class="slide-dot" data-slide="2" aria-label="Slide 3"></button>
+<button class="slide-dot" data-slide="3" aria-label="Slide 4"></button>
+<button class="slide-dot" data-slide="4" aria-label="Slide 5"></button>
+</div>
+<div class="dust-particle" style="top:20%;left:10%;animation-delay:0s"></div>
+<div class="dust-particle" style="top:40%;left:80%;animation-delay:2s"></div>
+<div class="dust-particle" style="top:60%;left:30%;animation-delay:4s"></div>
+<div class="dust-particle" style="top:80%;left:70%;animation-delay:6s"></div>
+<div class="dust-particle" style="top:30%;left:50%;animation-delay:1s"></div>
+<div class="hero-content">
+<div class="hero-badge"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Welcome to Devki Ruiru</div>
+<h2 class="wave-text"><span>I</span><span>g</span><span>n</span><span>i</span><span>t</span><span>e</span> <span class="gold shimmer-text">Your</span> <span class="red">Future</span><br><span>a</span><span>t</span>  <span>The D</span><span>e</span><span>v</span><span>k</span><span>i</span> <span>R</span><span>u</span><span>i</span><span>r</span><span>u</span><span> Senior School .</span></h2>
+<p>A senior school where faith, discipline and academic excellence meet &mdash; preparing every learner to lead with integrity in a changing world.</p>
+<div class="hero-buttons">
+<a href="admissions.html" class="btn-primary ripple">Apply for 2026 Intake<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<a href="about.html" class="btn-outline ripple">Discover Our Story</a>
+</div>
+</div>
+</section>
+
+<section class="quick-links">
+<div class="quick-links-container stagger-children">
+<a href="academics.html" class="quick-card reveal tilt-card jelly"><div class="quick-card-icon float-icon">&#128214;</div><h3>Academics</h3><p>Rigorous curriculum &amp; pathways</p><span class="quick-link-arrow">Explore &rarr;</span></a>
+<a href="admissions.html" class="quick-card reveal tilt-card jelly"><div class="quick-card-icon float-icon" style="animation-delay:0.5s">&#127891;</div><h3>Admissions</h3><p>Join the Devki family</p><span class="quick-link-arrow">Explore &rarr;</span></a>
+<a href="news.html" class="quick-card reveal tilt-card jelly"><div class="quick-card-icon float-icon" style="animation-delay:1s">&#127942;</div><h3>Achievements</h3><p>Excellence beyond the classroom</p><span class="quick-link-arrow">Explore &rarr;</span></a>
+<a href="contact.html" class="quick-card reveal tilt-card jelly"><div class="quick-card-icon float-icon" style="animation-delay:1.5s">&#127970;</div><h3>Contact</h3><p>Visit us in Ruiru, Kiambu</p><span class="quick-link-arrow">Explore &rarr;</span></a>
+</div>
+</section>
+
+<section class="welcome" id="about">
+<div class="welcome-container">
+<div class="welcome-text reveal">
+<div class="welcome-label swing">Welcome</div>
+<h2>Where excellence and scholarship rise together.</h2>
+<p>At The Devki Ruiru Senior School we cultivate confident, God-fearing young women and men. Our teachers, chaplains and mentors guide every learner to discover their gifts and use them for the good of family, nation and the world.</p>
+<p>From rigorous academics to service, sports and the arts &mdash; every day here is a chance to grow in wisdom, courage and grace.</p>
+<a href="about.html" class="btn-dark ripple">About the school<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+<div class="welcome-images reveal">
+<div class="welcome-img img-reveal"><img src="blockB.jpeg" alt="Students reading"></div>
+<div class="welcome-img img-reveal"><img src="aerialorg.jpeg" alt="Library"></div>
+<div class="welcome-img img-reveal"><img src="labprac.jpeg" alt="Science lab"></div>
+</div>
+</div>
+</section>
+
+<section class="core-values" id="values">
+<div class="core-values-container">
+<div class="core-values-label reveal flip-in">Our Core Values</div>
+<h2 class="reveal">Six pillars that shape every Devki learner.</h2>
+<div class="values-grid">
+<div class="value-card reveal tilt-card"><div class="value-icon float-icon">&#128293;</div><h3>God Fearing</h3><p>Faith and reverence at the heart of learning.</p></div>
+<div class="value-card reveal tilt-card"><div class="value-icon float-icon" style="animation-delay:0.3s">&#128737;</div><h3>Integrity</h3><p>Honest, principled and accountable in all we do.</p></div>
+<div class="value-card reveal tilt-card"><div class="value-icon float-icon" style="animation-delay:0.6s">&#127891;</div><h3>Discipline</h3><p>Order, focus and commitment to excellence.</p></div>
+<div class="value-card reveal tilt-card"><div class="value-icon float-icon" style="animation-delay:0.9s">&#128157;</div><h3>Peace</h3><p>A calm, respectful and harmonious community.</p></div>
+<div class="value-card reveal tilt-card"><div class="value-icon float-icon" style="animation-delay:1.2s">&#127942;</div><h3>Hard Work</h3><p>Diligence that transforms effort into achievement.</p></div>
+<div class="value-card reveal tilt-card"><div class="value-icon float-icon" style="animation-delay:1.5s">&#128101;</div><h3>Collaboration</h3><p>Learning and thriving together, as one family.</p></div>
+</div>
+</div>
+</section>
+
+<section class="principal" id="board-of-management" style="background:var(--bg-cream);">
+<div class="principal-container">
+<div class="principal-img reveal slide-right">
+<div class="principal-img-wrapper gradient-border">
+<img src="chairman.jpg" alt="Chairman, Board of Management" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:var(--gold);font-size:48px;>&#9884;</div>'">
+</div>
+</div>
+<div class="principal-text reveal slide-left">
+<div class="principal-label">Message from the Board of Management</div>
+<h2>Together, Let Us Ignite the Future</h2>
+<p>On behalf of the Board of Management, I am delighted to welcome you to our school website. Our school is committed to providing a supportive, disciplined, and inspiring learning environment where every learner is given an opportunity to discover and develop their unique talents, skills, and abilities.</p>
+<p>The Board of Management works closely with the school administration, teachers, parents, learners, and the wider community to promote quality education and ensure the school continues to grow as a centre of excellence.</p>
+<p>We believe that education is a shared responsibility. Through teamwork, discipline, innovation, integrity, and commitment, we aim to equip our learners with the knowledge, values, competencies, and confidence they need to succeed in an ever-changing world.</p>
+
+<div class="principal-name"><h4>Joseph Murumuri</h4><span>Chairman, Board of Management<br>The Devki Ruiru Senior School</span></div>
+</div>
+</div>
+</section>
+
+<section class="principal" id="principal">
+<div class="principal-container">
+<div class="principal-img reveal slide-right">
+<div class="principal-img-wrapper gradient-border">
+<img src="principal.png" alt="The Principal" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:var(--gold);font-size:48px;>&#9884;</div>'">
+</div>
+</div>
+<div class="principal-text reveal slide-left">
+<div class="principal-label">Principal's Remarks</div>
+<h2>Karibu to The Devki Ruiru Senior School</h2>
+<p>It gives me great pleasure to welcome you to The Devki Ruiru Senior School, a place where academic excellence meets character, discipline, and purpose.</p>
+<p>Our school was founded on the belief that every student has unique potential. We nurture that potential through rigorous academics, talent development, and strong values of integrity, respect, and servant leadership.</p>
+<p>As we move forward, our goal remains clear &mdash; to raise scholars, leaders, and patriots who will make a positive difference in Kenya and the world.</p>
+<a href="principal.html" class="btn-dark ripple" style="margin-top:12px;">Read Full Message<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<div class="principal-name"><h4>Principal</h4><span>The Devki Ruiru Senior School<br>devkiruirusecexam1@gmail.com</span></div>
+</div>
+</div>
+</section>
+
+<section class="principal" id="deputy-principal" style="background:var(--bg-light);">
+<div class="principal-container">
+<div class="principal-text reveal slide-left">
+<div class="principal-label">Deputy Principal's Remarks</div>
+<h2>Together We Build Excellence</h2>
+<p>As the Deputy Principal of The Devki Ruiru Senior School, I am honoured to serve this remarkable institution and the extraordinary young people who walk through our gates each day.</p>
+<p>Our students are well <strong>disciplined</strong>, <strong>motivated</strong>, and <strong>ambitious</strong>. As we embark on the CBE Curriculum, we have put in place programmes to support learner-centered learning, ensuring we produce well <strong>skilled</strong> individuals.</p>
+<p>Our school is very <strong>well staffed</strong> across all departments, with teachers fully <strong>accredited</strong> by the TSC. This ensures <strong>consistency</strong> and <strong>stability</strong> for our learners.</p>
+<a href="deputy.html" class="btn-dark ripple" style="margin-top:12px;">Read Full Message<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<div class="principal-name"><h4>Madam Munangwe, Deputy Principal.</h4><span>The Devki Ruiru Senior School<br>devkiruirusecexam1@gmail.com</span></div>
+</div>
+<div class="principal-img reveal slide-right">
+<div class="principal-img-wrapper gradient-border">
+<img src="deputy.jpeg" alt="The Deputy Principal" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:var(--gold);font-size:48px;>&#9884;</div>'">
+</div>
+</div>
+</div>
+</section>
+
+<section class="stats" id="stats">
+<div class="stats-container">
+<div class="stat-item reveal bounce-in"><h3 class="counter counter-roll" data-target="500">0</h3><span>Learners</span></div>
+<div class="stat-item reveal bounce-in"><h3 class="counter counter-roll" data-target="45">0</h3><span>Teachers &amp; Staff</span></div>
+<div class="stat-item reveal bounce-in"><h3 class="counter counter-roll" data-target="24">0</h3><span>Clubs &amp; Societies</span></div>
+<div class="stat-item reveal bounce-in"><h3 class="counter counter-roll" data-target="98" data-suffix="%">0</h3><span>Transition Rate</span></div>
+</div>
+</section>
+
+<section class="life-at-devki" id="news">
+<div class="life-container">
+<div class="life-header reveal zoom-blur">
+<div><div class="life-label">Life at Devki</div><h2>More than a classroom &mdash; a full journey.</h2></div>
+<a href="news.html">See news &amp; events &rarr;</a>
+</div>
+<div class="life-grid">
+<a href="news.html" class="life-card reveal magnetic">
+<div class="life-card-img"><img src="LABpYSICS PROJECT.jpeg"><span class="life-tag">Innovation</span></div>
+<div class="life-card-content"><h3>Physics learners power a solar rig</h3><p>Hands-on projects where theory meets real Kenyan life.</p></div>
+</a>
+<a href="news.html" class="life-card reveal magnetic">
+<div class="life-card-img"><img src="robotics.jpeg" alt="robotics club"><span class="life-tag">Robotics club</span></div>
+<div class="life-card-content"><h3>Devki Robotics and innovation clab 2025 &mdash; a </h3><p>project built from scratch .</p></div>
+</a>
+<a href="news.html" class="life-card reveal magnetic">
+<div class="life-card-img"><img src="school parade.jpeg" alt="Community"><span class="life-tag">Community</span></div>
+<div class="life-card-content"><h3>Morning parade &amp; devotion</h3><p>Every day begins with prayer, values and unity.</p></div>
+</a>
+</div>
+</div>
+</section>
+
+<section class="cta" id="admissions">
+<div class="cta-container">
+<h2 class="reveal neon-flicker">Your future <span class="gold shimmer-text">starts</span> <span class="red">here</span>.</h2>
+<p class="reveal">Applications for the 2026 intake are open. Join a school where every learner is known, loved and challenged to rise.</p>
+<div class="cta-buttons reveal">
+<a href="admissions.html" class="btn-primary ripple">Start Application<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<a href="contact.html" class="btn-outline ripple">Book a Campus Visit</a>
+</div>
+</div>
+</section>
+
+<footer class="footer" id="contact">
+<div class="footer-container">
+<div class="footer-brand reveal">
+<img src="Untitled.png" alt="The Devki Ruiru Senior devkiruirusecexam1@gmail.com" class="footer-logo-img">
+<h3>Devki Ruiru</h3>
+<span>Senior School</span>
+<p>Nurturing tomorrow's leaders through faith, discipline, and academic excellence.</p>
+<div class="footer-social">
+<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">&#128247;</a>
+<a href="https://x.com" target="_blank" rel="noopener" aria-label="X">&#120143;</a>
+</div>
+</div>
+<div class="footer-col reveal">
+<h4>Explore</h4>
+<ul>
+<li><a href="about.html">About Us</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="news.html">News &amp; Events</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col reveal">
+<h4>Core Values</h4>
+<ul>
+<li><a href="#values"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>God Fearing</a></li>
+<li><a href="#values"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Integrity</a></li>
+<li><a href="#values"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Discipline</a></li>
+<li><a href="#values"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Peace</a></li>
+<li><a href="#values"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Hard Work</a></li>
+<li><a href="#values"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Collaboration</a></li>
+</ul>
+</div>
+<div class="footer-col reveal">
+<h4>Contact</h4>
+<ul class="footer-contact">
+<li><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><strong>The Devki Ruiru Senior School</strong><br>Ruiru, Kiambu County, Kenya<br><small style="color:var(--gold)">Along Ruiru-Kamiti Road, near Devki Steel Mills</small></li>
+<li><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>+254 798593187</li>
+<li><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>devkiruirusecexam1@gmail.com</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 The Devki Ruiru Senior School. All rights reserved.</p>
+<span class="footer-motto glow-text">Ignite &middot; Your &middot; Future</span>
+</div>
+</footer>
+<script>
+// MOBILE MENU
+const mobileMenuBtn=document.getElementById('mobileMenuBtn');
+const mobileNav=document.getElementById('mobileNav');
+const mobileNavOverlay=document.getElementById('mobileNavOverlay');
+const mobileNavLinks=document.querySelectorAll('.mobile-nav-link');
+
+function openMobileMenu(){
+    mobileMenuBtn.classList.add('active');
+    mobileNav.classList.add('active');
+    mobileNavOverlay.classList.add('active');
+    document.body.classList.add('menu-open');
+}
+
+function closeMobileMenu(){
+    mobileMenuBtn.classList.remove('active');
+    mobileNav.classList.remove('active');
+    mobileNavOverlay.classList.remove('active');
+    document.body.classList.remove('menu-open');
+}
+
+mobileMenuBtn.addEventListener('click',function(){
+    if(mobileNav.classList.contains('active')){closeMobileMenu();}else{openMobileMenu();}
+});
+
+mobileNavOverlay.addEventListener('click',closeMobileMenu);
+
+mobileNavLinks.forEach(function(link){
+    link.addEventListener('click',closeMobileMenu);
+});
+
+// INFINITY SLIDER
+const slides=document.querySelectorAll('.hero-slide');
+const dots=document.querySelectorAll('.slide-dot');
+const prevBtn=document.getElementById('prevSlide');
+const nextBtn=document.getElementById('nextSlide');
+let currentSlide=0;
+let slideInterval;
+const slideDuration=5000;
+
+function goToSlide(index){
+    let targetIndex=index;
+    const totalSlides=slides.length;
+    if(targetIndex<0){targetIndex=totalSlides-1;}
+    else if(targetIndex>=totalSlides){targetIndex=0;}
+    slides.forEach(function(slide,i){
+        slide.classList.remove('active');
+        dots[i].classList.remove('active');
+    });
+    slides[targetIndex].classList.add('active');
+    dots[targetIndex].classList.add('active');
+    currentSlide=targetIndex;
+    resetHeroAnimations();
+}
+
+function nextSlide(){
+    goToSlide(currentSlide+1);
+}
+
+function prevSlide(){
+    goToSlide(currentSlide-1);
+}
+
+function resetHeroAnimations(){
+    const badge=document.querySelector('.hero-badge');
+    const heading=document.querySelector('.hero h2');
+    const paragraph=document.querySelector('.hero p');
+    const buttons=document.querySelector('.hero-buttons');
+    [badge,heading,paragraph,buttons].forEach(function(el){
+        el.style.animation='none';
+        el.offsetHeight;
+        el.style.animation=null;
+    });
+}
+
+function startAutoSlide(){
+    slideInterval=setInterval(nextSlide,slideDuration);
+}
+
+function stopAutoSlide(){
+    clearInterval(slideInterval);
+}
+
+nextBtn.addEventListener('click',function(){
+    stopAutoSlide();
+    nextSlide();
+    startAutoSlide();
+});
+
+prevBtn.addEventListener('click',function(){
+    stopAutoSlide();
+    prevSlide();
+    startAutoSlide();
+});
+
+dots.forEach(function(dot,index){
+    dot.addEventListener('click',function(){
+        stopAutoSlide();
+        goToSlide(index);
+        startAutoSlide();
+    });
+});
+
+const heroSection=document.querySelector('.hero');
+heroSection.addEventListener('mouseenter',stopAutoSlide);
+heroSection.addEventListener('mouseleave',startAutoSlide);
+
+startAutoSlide();
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
+    anchor.addEventListener('click',function(e){
+        e.preventDefault();
+        const target=document.querySelector(this.getAttribute('href'));
+        if(target){
+            target.scrollIntoView({behavior:'smooth',block:'start'});
+            document.querySelectorAll('.nav-links a').forEach(function(link){
+                link.classList.remove('active');
+            });
+            if(this.closest('.nav-links')){this.classList.add('active');}
+        }
+    });
+});
+
+// SCROLL REVEAL
+const revealOptions={threshold:0.1,rootMargin:'0px 0px -50px 0px'};
+const revealObserver=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+        if(entry.isIntersecting){entry.target.classList.add('active');}
+    });
+},revealOptions);
+
+document.querySelectorAll('.reveal').forEach(function(el){
+    revealObserver.observe(el);
+});
+
+// COUNTER ANIMATION
+const counterObserver=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+        if(entry.isIntersecting){
+            const counter=entry.target;
+            const target=parseInt(counter.getAttribute('data-target'));
+            const suffix=counter.getAttribute('data-suffix')||'+';
+            const duration=2000;
+            const step=target/(duration/16);
+            let current=0;
+            function updateCounter(){
+                current+=step;
+                if(current<target){counter.textContent=Math.floor(current)+suffix;requestAnimationFrame(updateCounter);}
+                else{counter.textContent=target+suffix;}
+            }
+            updateCounter();
+            counterObserver.unobserve(counter);
+        }
+    });
+},{threshold:0.5});
+
+document.querySelectorAll('.counter').forEach(function(counter){
+    counterObserver.observe(counter);
+});
+
+// SCROLL PROGRESS BAR
+window.addEventListener('scroll',function(){
+    const scrollProgress=document.getElementById('scrollProgress');
+    const scrollTop=window.pageYOffset;
+    const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+    const scrollPercent=(scrollTop/docHeight)*100;
+    scrollProgress.style.width=scrollPercent+'%';
+});
+
+// NAVBAR SCROLL EFFECT
+window.addEventListener('scroll',function(){
+    const navbar=document.querySelector('.navbar');
+    const currentScroll=window.pageYOffset;
+    if(currentScroll>100){navbar.style.boxShadow='0 4px 20px rgba(0,0,0,0.08)';}
+    else{navbar.style.boxShadow='none';}
+});
+
+// ACTIVE NAV LINK ON SCROLL
+const sections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',function(){
+    let current='';
+    sections.forEach(function(section){
+        const sectionTop=section.offsetTop;
+        const sectionHeight=section.clientHeight;
+        if(pageYOffset>=sectionTop-200){current=section.getAttribute('id');}
+    });
+    document.querySelectorAll('.nav-links a').forEach(function(link){
+        link.classList.remove('active');
+        if(link.getAttribute('href')==='#'+current){link.classList.add('active');}
+    });
+});
+
+// PRELOADER
+const preloader=document.getElementById('preloader');
+const preloaderBar=document.getElementById('preloader-bar');
+let loadProgress=0;
+const preloaderInterval=setInterval(function(){
+    loadProgress+=Math.random()*15;
+    if(loadProgress>100){loadProgress=100;}
+    preloaderBar.style.width=loadProgress+'%';
+    if(loadProgress===100){
+        clearInterval(preloaderInterval);
+        setTimeout(function(){
+            preloader.style.opacity='0';
+            preloader.style.visibility='hidden';
+            setTimeout(function(){preloader.style.display='none';},800);
+        },400);
+    }
+},150);
+
+</script>
+</body>
+</html>

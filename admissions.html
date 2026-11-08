@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Devki Ruiru Senior School - Admissions</title>
+    <link rel="icon" type="image/png" href="Untitled.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8B1E1E;
+            --primary-light: #C0392B;
+            --primary-glow: rgba(139, 30, 30, 0.3);
+            --gold: #D4A843;
+            --gold-light: #F0D878;
+            --dark: #1A0F0F;
+            --dark-brown: #2C1810;
+            --cream: #FDF8F3;
+            --text-dark: #2D2424;
+            --text-muted: #6B5B5B;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+
+        /* Top Bar */
+        .top-bar {
+            background: linear-gradient(90deg, var(--dark) 0%, var(--dark-brown) 50%, var(--dark) 100%);
+            background-size: 200% 100%;
+            animation: gradientShift 8s ease infinite;
+            color: white; padding: 10px 0; font-size: 13px; position: relative; overflow: hidden;
+        }
+        .top-bar::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212,168,67,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
+        .top-bar-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
+        .top-bar a { color: var(--gold-light); text-decoration: none; transition: all 0.3s; }
+        .top-bar a:hover { color: white; text-shadow: 0 0 10px var(--gold); }
+        .top-bar .motto { font-weight: 600; letter-spacing: 3px; text-transform: uppercase; font-size: 11px; color: var(--gold); }
+        .top-bar .motto span { display: inline-block; animation: letterBounce 2s ease-in-out infinite; }
+        .top-bar .motto span:nth-child(1) { animation-delay: 0s; }
+        .top-bar .motto span:nth-child(2) { animation-delay: 0.1s; }
+        .top-bar .motto span:nth-child(3) { animation-delay: 0.2s; }
+        .top-bar .motto span:nth-child(4) { animation-delay: 0.3s; }
+        .top-bar .motto span:nth-child(5) { animation-delay: 0.4s; }
+        @keyframes letterBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+        /* Navigation */
+        nav { background: rgba(255,251,247,0.95); backdrop-filter: blur(20px); padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 30px rgba(0,0,0,0.08); transition: all 0.3s; }
+        nav.scrolled { padding: 8px 0; box-shadow: 0 4px 40px rgba(0,0,0,0.12); }
+        .nav-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+        .logo-icon { width: 56px; height: 56px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 3px solid var(--gold); box-shadow: 0 0 20px var(--primary-glow), 0 4px 15px rgba(0,0,0,0.1); animation: pulseGlow 3s ease-in-out infinite; transition: all 0.3s; }
+        .logo-icon:hover { transform: scale(1.08); box-shadow: 0 0 30px var(--primary-glow), 0 0 40px rgba(212,168,67,0.3); }
+        .logo-icon img { width: 44px; height: 44px; object-fit: contain; }
+        @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 20px var(--primary-glow), 0 4px 15px rgba(0,0,0,0.1); } 50% { box-shadow: 0 0 35px var(--primary-glow), 0 0 50px rgba(212,168,67,0.25); } }
+        .logo-text h1 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); line-height: 1.2; }
+        .logo-text span { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); font-weight: 600; }
+
+        /* Desktop Nav Links */
+        .nav-links { display: flex; gap: 35px; list-style: none; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 14px; position: relative; padding: 5px 0; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--gold)); transition: width 0.3s ease; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 1001; background: none; border: none; }
+        .menu-toggle span { display: block; width: 28px; height: 3px; background: var(--dark); border-radius: 3px; transition: all 0.3s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+        /* Mobile Nav */
+        .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh; background: linear-gradient(180deg, var(--dark-brown) 0%, var(--dark) 100%); z-index: 999; padding: 100px 30px 40px; transition: right 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: -10px 0 40px rgba(0,0,0,0.3); overflow-y: auto; }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 998; opacity: 0; transition: opacity 0.3s ease; }
+        .mobile-nav-overlay.active { opacity: 1; }
+        .mobile-nav ul { list-style: none; }
+        .mobile-nav ul li { margin-bottom: 5px; opacity: 0; transform: translateX(30px); transition: all 0.4s ease; }
+        .mobile-nav.active ul li { opacity: 1; transform: translateX(0); }
+        .mobile-nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
+        .mobile-nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
+        .mobile-nav ul li a { display: block; color: white; text-decoration: none; font-size: 18px; font-weight: 500; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
+        .mobile-nav ul li a:hover, .mobile-nav ul li a.active { color: var(--gold); padding-left: 10px; }
+        .mobile-nav .mobile-cta { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
+        .mobile-nav .mobile-cta a { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 24px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; transition: all 0.3s; }
+        .mobile-nav .mobile-cta .btn-whatsapp-nav { background: linear-gradient(135deg, #25D366, #128C7E); color: white; box-shadow: 0 4px 20px rgba(37,211,102,0.3); }
+        .mobile-nav .mobile-cta .btn-whatsapp-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+        .mobile-nav .mobile-cta .btn-email-nav { background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.3); }
+        .mobile-nav .mobile-cta .btn-email-nav:hover { background: rgba(255,255,255,0.2); border-color: white; }
+        .mobile-nav .mobile-contact-info { margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .mobile-nav .mobile-contact-info p { color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .mobile-nav .mobile-contact-info i { color: var(--gold); width: 20px; }
+
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 14px; border: none; cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 4px 20px rgba(139,30,30,0.3); }
+        .btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139,30,30,0.4); }
+
+        /* Hero Slider */
+        .hero-slider { position: relative; height: 600px; overflow: hidden; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; }
+        .slide.active { opacity: 1; }
+        .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transform: scale(1.1); transition: transform 8s ease; }
+        .slide.active .slide-bg { transform: scale(1); }
+        .slide-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(26,15,15,0.85) 0%, rgba(44,24,16,0.7) 50%, rgba(26,15,15,0.6) 100%); }
+        .slide-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        .slide-badge { display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); padding: 8px 20px; border-radius: 50px; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 25px; animation: fadeInUp 0.8s ease forwards; opacity: 0; box-shadow: 0 4px 20px rgba(212,168,67,0.4); }
+        .slide h2 { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 700; color: white; line-height: 1.15; margin-bottom: 20px; max-width: 700px; animation: fadeInUp 0.8s ease 0.2s forwards; opacity: 0; text-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+        .slide h2 .highlight { background: linear-gradient(135deg, var(--gold), var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; position: relative; }
+        .slide p { font-size: 18px; color: rgba(255,255,255,0.9); max-width: 550px; line-height: 1.7; margin-bottom: 35px; animation: fadeInUp 0.8s ease 0.4s forwards; opacity: 0; }
+        .slide-buttons { display: flex; gap: 15px; animation: fadeInUp 0.8s ease 0.6s forwards; opacity: 0; flex-wrap: wrap; }
+        .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 15px; border: none; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 20px rgba(212,168,67,0.4); display: inline-flex; align-items: center; gap: 8px; }
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(212,168,67,0.5); }
+        .btn-outline { background: transparent; color: white; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 15px; border: 2px solid rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-3px); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Slider Controls */
+        .slider-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 10; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s; border: 2px solid transparent; }
+        .dot.active { background: var(--gold); transform: scale(1.3); box-shadow: 0 0 15px rgba(212,168,67,0.6); }
+        .dot:hover { background: rgba(255,255,255,0.8); }
+        .slider-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 30px; z-index: 10; pointer-events: none; }
+        .arrow { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; pointer-events: all; font-size: 18px; }
+        .arrow:hover { background: var(--gold); color: var(--dark); transform: scale(1.1); }
+
+        /* Particles */
+        .particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; pointer-events: none; }
+        .particle { position: absolute; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; opacity: 0.3; animation: float 15s infinite; }
+        @keyframes float { 0%,100% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.3; } 90% { opacity: 0.3; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
+
+        /* Welcome Banner */
+        .welcome-banner { background: linear-gradient(135deg, var(--primary) 0%, var(--dark-brown) 100%); padding: 40px 0; position: relative; overflow: hidden; }
+        .welcome-banner::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212,168,67,0.1) 0%, transparent 70%); animation: rotate 20s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .welcome-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+        .welcome-text { color: white; }
+        .welcome-text h3 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; }
+        .welcome-text h3 span { color: var(--gold-light); }
+        .welcome-text p { color: rgba(255,255,255,0.8); font-size: 15px; }
+        .welcome-stats { display: flex; gap: 40px; }
+        .stat { text-align: center; color: white; }
+        .stat-number { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--gold); display: block; }
+        .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
+
+        /* Main Content */
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 80px 20px; display: grid; grid-template-columns: 1fr 400px; gap: 60px; align-items: start; }
+        .how-to-apply { opacity: 0; transform: translateY(40px); animation: fadeInUp 0.8s ease forwards; }
+        .section-header { margin-bottom: 40px; }
+        .section-label { display: inline-block; color: var(--primary); font-size: 12px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; position: relative; padding-left: 20px; }
+        .section-label::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { transform: translateY(-50%) scale(1); opacity: 1; } 50% { transform: translateY(-50%) scale(1.5); opacity: 0.5; } }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--dark); line-height: 1.2; }
+        .section-title .word { display: inline-block; opacity: 0; transform: translateY(20px); animation: wordFadeIn 0.6s ease forwards; }
+        @keyframes wordFadeIn { to { opacity: 1; transform: translateY(0); } }
+
+        /* Steps */
+        .steps { display: flex; flex-direction: column; gap: 25px; }
+        .step { display: flex; gap: 20px; padding: 25px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.4s; position: relative; overflow: hidden; border: 2px solid transparent; }
+        .step::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--primary), var(--gold)); transform: scaleY(0); transition: transform 0.4s; transform-origin: top; }
+        .step:hover::before { transform: scaleY(1); }
+        .step:hover { transform: translateX(10px); box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-color: rgba(139,30,30,0.1); }
+        .step-number { width: 50px; height: 50px; min-width: 50px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; position: relative; box-shadow: 0 4px 15px rgba(139,30,30,0.3); }
+        .step-number::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--gold); opacity: 0; transition: all 0.3s; }
+        .step:hover .step-number::after { opacity: 1; inset: -6px; }
+        .step-content h4 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); margin-bottom: 6px; }
+        .step-content p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+        .step-content p a { color: var(--primary); text-decoration: none; font-weight: 600; position: relative; }
+        .step-content p a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s; }
+        .step-content p a:hover::after { width: 100%; }
+
+        /* Contact CTA Strip */
+        .contact-cta-strip { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); padding: 30px 0; position: relative; overflow: hidden; }
+        .contact-cta-strip::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); animation: rotate 20s linear infinite; }
+        .contact-cta-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; flex-wrap: wrap; gap: 20px; }
+        .contact-cta-text { color: white; }
+        .contact-cta-text h3 { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 5px; }
+        .contact-cta-text p { opacity: 0.9; font-size: 15px; }
+        .contact-cta-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn-whatsapp { background: white; color: #25D366; padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 15px; border: none; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .btn-whatsapp:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.25); background: #f0fff4; }
+        .btn-whatsapp i { font-size: 20px; }
+        .btn-email-cta { background: transparent; color: white; padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 15px; border: 2px solid rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+        .btn-email-cta:hover { background: rgba(255,255,255,0.15); border-color: white; transform: translateY(-3px); }
+        .btn-email-cta i { font-size: 18px; }
+
+        /* Info Card */
+        .info-card { background: linear-gradient(145deg, var(--dark-brown) 0%, var(--dark) 100%); border-radius: 24px; padding: 40px; color: white; position: relative; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.2); opacity: 0; transform: translateY(40px); animation: fadeInUp 0.8s ease 0.3s forwards; }
+        .info-card::before { content: ''; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212,168,67,0.15) 0%, transparent 70%); border-radius: 50%; }
+        .info-card::after { content: ''; position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(139,30,30,0.3) 0%, transparent 70%); border-radius: 50%; }
+        .info-card h3 { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 25px; position: relative; z-index: 1; }
+        .checklist { list-style: none; margin-bottom: 30px; position: relative; z-index: 1; }
+        .checklist li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); transition: all 0.3s; }
+        .checklist li:hover { padding-left: 10px; color: var(--gold-light); }
+        .checklist li:last-child { border-bottom: none; }
+        .check-icon { width: 24px; height: 24px; min-width: 24px; background: rgba(212,168,67,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 11px; transition: all 0.3s; }
+        .checklist li:hover .check-icon { background: var(--gold); color: var(--dark); transform: scale(1.2); }
+        .checklist li span { font-size: 14px; opacity: 0.9; }
+        .info-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,168,67,0.3), transparent); margin: 20px 0; position: relative; z-index: 1; }
+        .info-meta { position: relative; z-index: 1; }
+        .meta-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; font-size: 14px; }
+        .meta-item i { color: var(--gold); width: 20px; }
+        .meta-item strong { color: var(--gold-light); }
+        .info-card .btn-primary { width: 100%; margin-top: 25px; text-align: center; display: block; position: relative; z-index: 1; }
+
+        /* Testimonial */
+        .testimonial-strip { background: linear-gradient(135deg, var(--cream) 0%, #F5EDE4 100%); padding: 60px 0; position: relative; overflow: hidden; }
+        .testimonial-strip::before { content: '"'; position: absolute; top: -20px; left: 5%; font-family: 'Playfair Display', serif; font-size: 200px; color: rgba(139,30,30,0.05); line-height: 1; }
+        .testimonial-content { max-width: 800px; margin: 0 auto; padding: 0 20px; text-align: center; position: relative; z-index: 1; }
+        .testimonial-content p { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); line-height: 1.6; font-style: italic; margin-bottom: 20px; }
+        .testimonial-content .author { color: var(--primary); font-weight: 600; font-size: 14px; }
+
+        /* Footer */
+        footer { background: linear-gradient(180deg, var(--dark-brown) 0%, var(--dark) 100%); color: white; padding: 60px 0 30px; position: relative; overflow: hidden; }
+        footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary), var(--gold), var(--primary)); background-size: 200% 100%; animation: gradientShift 3s linear infinite; }
+        .footer-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 50px; }
+        .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 5px; }
+        .footer-brand span { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+        .footer-brand p { margin-top: 15px; font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.7); max-width: 280px; }
+        .social-links { display: flex; gap: 12px; margin-top: 20px; }
+        .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.1); }
+        .social-links a:hover { background: var(--gold); color: var(--dark); transform: translateY(-3px); border-color: var(--gold); }
+        .footer-column h4 { font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; color: var(--gold); }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 12px; }
+        .footer-column ul li a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .footer-column ul li a::before { content: ''; width: 0; height: 2px; background: var(--gold); transition: width 0.3s; }
+        .footer-column ul li a:hover { color: var(--gold-light); padding-left: 5px; }
+        .footer-column ul li a:hover::before { width: 10px; }
+        .footer-contact p { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 14px; color: rgba(255,255,255,0.7); }
+        .footer-contact i { color: var(--gold); width: 16px; }
+        .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding: 25px 20px 0; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: rgba(255,255,255,0.5); }
+        .footer-bottom .motto { letter-spacing: 4px; font-weight: 600; }
+        .footer-bottom .motto span { color: var(--gold); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content { grid-template-columns: 1fr; gap: 40px; }
+            .info-card { max-width: 500px; margin: 0 auto; }
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .contact-cta-content { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .mobile-nav { display: block; }
+            .mobile-nav-overlay { display: block; }
+            .slide h2 { font-size: 32px; }
+            .slide p { font-size: 16px; }
+            .hero-slider { height: 500px; }
+            .slide-buttons { flex-direction: column; width: 100%; }
+            .slide-buttons a { width: 100%; justify-content: center; }
+            .welcome-content { flex-direction: column; text-align: center; gap: 30px; }
+            .welcome-stats { gap: 30px; }
+            .section-title { font-size: 28px; }
+            .footer-content { grid-template-columns: 1fr; gap: 30px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .contact-cta-buttons { justify-content: center; width: 100%; }
+            .contact-cta-buttons a { width: 100%; justify-content: center; }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+        /* WhatsApp floating button */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 997; transition: all 0.3s; animation: whatsappPulse 2s infinite; }
+        .whatsapp-float:hover { transform: scale(1.1) translateY(-3px); box-shadow: 0 8px 30px rgba(37,211,102,0.6); }
+        @keyframes whatsappPulse { 0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7), 0 0 40px rgba(37,211,102,0.3); } }
+        .whatsapp-float .tooltip { position: absolute; right: 70px; background: var(--dark); color: white; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; white-space: nowrap; opacity: 0; transform: translateX(10px); transition: all 0.3s; pointer-events: none; }
+        .whatsapp-float:hover .tooltip { opacity: 1; transform: translateX(0); }
+        @media (max-width: 768px) {
+            .whatsapp-float { width: 52px; height: 52px; font-size: 24px; bottom: 20px; right: 20px; }
+            .whatsapp-float .tooltip { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div>
+                <a href="tel:+254798593187"><i class="fas fa-phone-alt"></i> +254 798593187</a>
+                <span style="margin: 0 15px; opacity: 0.3">|</span>
+                <a href="mailto:devkiruirusecexam1@gmail.com?subject=Admission%20Enquiry%20-%20Devki%20Ruiru%20Senior%20School&body=Hello%2C%0D%0A%0D%0AI%20would%20like%20to%20enquire%20about%20admissions%20for%20the%202026%20academic%20year.%0D%0A%0D%0AName%3A%20%0D%0AGrade%20interested%20in%3A%20%0D%0APhone%20number%3A%20%0D%0A%0D%0AThank%20you."><i class="fas fa-envelope"></i> devkiruirusecexam1@gmail.com</a>
+            </div>
+            <div class="motto">
+                <span>M</span><span>o</span><span>t</span><span>t</span><span>o</span>
+                <span style="margin: 0 8px; opacity: 0.5">·</span>
+                <span>I</span><span>g</span><span>n</span><span>i</span><span>t</span><span>e</span>
+                <span style="margin: 0 8px; opacity: 0.5">·</span>
+                <span>Y</span><span>o</span><span>u</span><span>r</span>
+                <span style="margin: 0 8px; opacity: 0.5">·</span>
+                <span>F</span><span>u</span><span>t</span><span>u</span><span>r</span><span>e</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <img src="Untitled.png" alt="Devki Ruiru School Logo">
+                </div>
+                <div class="logo-text">
+                    <h1>The Devki Ruiru</h1>
+                    <span>Senior School</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="#" class="active">Admissions</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://wa.me/254798593187" class="btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Apply Now</a></li>
+            </ul>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+    <!-- Mobile Navigation Panel -->
+    <div class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="#" class="active">Admissions</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="mobile-cta">
+            <a href="https://wa.me/254798593187" class="btn-whatsapp-nav" target="_blank">
+                <i class="fab fa-whatsapp"></i> Apply via WhatsApp
+            </a>
+            <a href="mailto:devkiruirusecexam1@gmail.com?subject=Admission%20Enquiry%20-%20Devki%20Ruiru%20Senior%20School&body=Hello%2C%0D%0A%0D%0AI%20would%20like%20to%20enquire%20about%20admissions%20for%20the%202026%20academic%20year.%0D%0A%0D%0AName%3A%20%0D%0AGrade%20interested%20in%3A%20%0D%0APhone%20number%3A%20%0D%0A%0D%0AThank%20you." class="btn-email-nav">
+                <i class="fas fa-envelope"></i> Send Email
+            </a>
+        </div>
+        <div class="mobile-contact-info">
+            <p><i class="fas fa-phone"></i> +254 798593187</p>
+            <p><i class="fas fa-map-marker-alt"></i> Ruiru, Kiambu County, Kenya</p>
+        </div>
+    </div>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="particles" id="particles"></div>
+
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <div class="slide-bg" style="background-image: url('SCHOOL\ GATE.jpeg')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-badge">🎓 Admissions Open 2026</div>
+                <h2>Your Future <span class="highlight">Begins Here</span></h2>
+                <p>At Devki Ruiru, every student is seen, heard, and valued. Join a community where your potential is nurtured and your dreams take flight.</p>
+                <div class="slide-buttons">
+                    <a href="https://wa.me/254798593187" class="btn-gold" target="_blank"><i class="fab fa-whatsapp"></i> Start Your Journey</a>
+                    <a href="mailto:devkiruirusecexam1@gmail.com?subject=Admission%20Enquiry%20-%20Devki%20Ruiru%20Senior%20School&body=Hello%2C%0D%0A%0D%0AI%20would%20like%20to%20enquire%20about%20admissions%20for%20the%202026%20academic%20year.%0D%0A%0D%0AName%3A%20%0D%0AGrade%20interested%20in%3A%20%0D%0APhone%20number%3A%20%0D%0A%0D%0AThank%20you." class="btn-outline"><i class="fas fa-envelope"></i> Email Us</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="slide-bg" style="background-image: url('aerial\ view.jpeg')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-badge">⭐ Excellence in Education</div>
+                <h2>Where <span class="highlight">Leaders</span> Are Made</h2>
+                <p>We do not just teach subjects — we shape character. Our holistic approach ensures you grow academically, spiritually, and socially.</p>
+                <div class="slide-buttons">
+                    <a href="https://wa.me/254798593187" class="btn-gold" target="_blank"><i class="fab fa-whatsapp"></i> Enroll Today</a>
+                    <a href="mailto:devkiruirusecexam1@gmail.com?subject=School%20Visit%20Booking%20-%20Devki%20Ruiru&body=Hello%2C%0D%0A%0D%0AI%20would%20like%20to%20book%20a%20visit%20to%20Devki%20Ruiru%20Senior%20School.%0D%0A%0D%0AName%3A%20%0D%0APreferred%20date%3A%20%0D%0APhone%20number%3A%20%0D%0A%0D%0AThank%20you." class="btn-outline"><i class="fas fa-calendar-alt"></i> Book a Visit</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="slide-bg" style="background-image: url('blockB.jpeg')"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-badge">🌟 Be Part of Something Great</div>
+                <h2>You <span class="highlight">Belong</span> Here</h2>
+                <p>From the moment you step through our gates, you become family. Experience a warm, inclusive environment designed for your success.</p>
+                <div class="slide-buttons">
+                    <a href="https://wa.me/254798593187" class="btn-gold" target="_blank"><i class="fab fa-whatsapp"></i> Join Our Family</a>
+                    <a href="mailto:devkiruirusecexam1@gmail.com?subject=More%20Information%20-%20Devki%20Ruiru&body=Hello%2C%0D%0A%0D%0AI%20would%20like%20to%20learn%20more%20about%20Devki%20Ruiru%20Senior%20School.%0D%0A%0D%0AName%3A%20%0D%0AInterest%20area%3A%20%0D%0APhone%20number%3A%20%0D%0A%0D%0AThank%20you." class="btn-outline"><i class="fas fa-info-circle"></i> Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="slider-arrows">
+            <div class="arrow" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="arrow" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="slider-dots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+        </div>
+    </section>
+
+    <!-- Welcome Banner -->
+    <section class="welcome-banner">
+        <div class="welcome-content">
+            <div class="welcome-text">
+                <h3>You Are <span>Welcome Here</span> 🎉</h3>
+                <p>Join hundreds of students who have found their home at Devki Ruiru</p>
+            </div>
+            <div class="welcome-stats">
+                <div class="stat">
+                    <span class="stat-number" data-target="500">0</span>
+                    <span class="stat-label">Students</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="50">0</span>
+                    <span class="stat-label">Teachers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="95">0</span>
+                    <span class="stat-label">% Success</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="how-to-apply">
+            <div class="section-header">
+                <div class="section-label">How to Apply</div>
+                <h2 class="section-title" id="sectionTitle">Four simple steps to your bright future.</h2>
+            </div>
+
+            <div class="steps">
+                <div class="step animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Submit an Enquiry</h4>
+                        <p>Complete our <a href="https://wa.me/254798593187" target="_blank">WhatsApp enquiry</a> or <a href="mailto:devkiruirusecexam1@gmail.com?subject=Admission%20Enquiry%20-%20Devki%20Ruiru%20Senior%20School&body=Hello%2C%0D%0A%0D%0AI%20would%20like%20to%20enquire%20about%20admissions%20for%20the%202026%20academic%20year.%0D%0A%0D%0AName%3A%20%0D%0AGrade%20interested%20in%3A%20%0D%0APhone%20number%3A%20%0D%0A%0D%0AThank%20you.">email us</a>. We are excited to hear from you and will respond within 24 hours!</p>
+                    </div>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Collect the Application Pack</h4>
+                        <p>Pick up the application form and prospectus at the school office. Our friendly staff will guide you through every detail.</p>
+                    </div>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Interview & Assessment</h4>
+                        <p>Meet our team for a friendly interview and academic assessment. This is a chance for us to get to know you — no pressure, just a conversation!</p>
+                    </div>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Offer & Enrollment</h4>
+                        <p>Receive your offer letter and complete enrollment for 2026. <strong style="color: var(--primary)">Welcome to the family!</strong> 🎓</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>What to Bring</h3>
+            <ul class="checklist">
+                <li><div class="check-icon"><i class="fas fa-check"></i></div><span>KCPE / Junior School results slip</span></li>
+                <li><div class="check-icon"><i class="fas fa-check"></i></div><span>Birth certificate copy</span></li>
+                <li><div class="check-icon"><i class="fas fa-check"></i></div><span>Two passport photos</span></li>
+                <li><div class="check-icon"><i class="fas fa-check"></i></div><span>Leaving certificate (if applicable)</span></li>
+                <li><div class="check-icon"><i class="fas fa-check"></i></div><span>Medical form</span></li>
+            </ul>
+            <div class="info-divider"></div>
+            <div class="info-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Intake opens: <strong>Term 1, 2026</strong></span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-coins"></i>
+                    <span>Application fee applies</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-phone"></i>
+                    <span><strong>+254 798593187</strong></span>
+                </div>
+            </div>
+            <a href="https://wa.me/254798593187" class="btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Contact Admissions</a>
+        </div>
+    </section>
+
+    <!-- Contact CTA Strip -->
+    <section class="contact-cta-strip">
+        <div class="contact-cta-content">
+            <div class="contact-cta-text">
+                <h3>Ready to Join Us? 🎓</h3>
+                <p>Reach out directly via WhatsApp or email — we are here to help!</p>
+            </div>
+            <div class="contact-cta-buttons">
+                <a href="https://wa.me/254798593187" class="btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+                <a href="mailto:devkiruirusecexam1@gmail.com?subject=Admission%20Enquiry%20-%20Devki%20Ruiru%20Senior%20School&body=Hello%2C%0D%0A%0D%0AI%20would%20like%20to%20enquire%20about%20admissions%20for%20the%202026%20academic%20year.%0D%0A%0D%0AName%3A%20%0D%0AGrade%20interested%20in%3A%20%0D%0APhone%20number%3A%20%0D%0A%0D%0AThank%20you." class="btn-email-cta">
+                    <i class="fas fa-envelope"></i> Send Email
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Strip -->
+    <section class="testimonial-strip">
+        <div class="testimonial-content">
+            <p>"Devki Ruiru did not just give me an education — it gave me a family, a purpose, and the confidence to chase my dreams. I am who I am because of this school."</p>
+            <div class="author">— Alumni, Class of 2024</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Devki Ruiru</h3>
+                <span>Senior School</span>
+                <p>Nurturing tomorrow's leaders through faith, discipline, and academic excellence.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/254798593187" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="news.html">News & Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Core Values</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-praying-hands" style="font-size: 10px; color: var(--gold);"></i> God Fearing</a></li>
+                    <li><a href="#"><i class="fas fa-shield-alt" style="font-size: 10px; color: var(--gold);"></i> Integrity</a></li>
+                    <li><a href="#"><i class="fas fa-balance-scale" style="font-size: 10px; color: var(--gold);"></i> Discipline</a></li>
+                    <li><a href="#"><i class="fas fa-dove" style="font-size: 10px; color: var(--gold);"></i> Peace</a></li>
+                    <li><a href="#"><i class="fas fa-fist-raised" style="font-size: 10px; color: var(--gold);"></i> Hard Work</a></li>
+                    <li><a href="#"><i class="fas fa-hands-helping" style="font-size: 10px; color: var(--gold);"></i> Collaboration</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-contact">
+                <h4>Contact</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Ruiru, Kiambu County, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 798593187</p>
+                <p><i class="fas fa-envelope"></i> devkiruirusecexam1@gmail.com</p>
+                <p style="margin-top: 15px;">
+                    <a href="https://wa.me/254798593187" target="_blank" style="color: var(--gold-light); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fab fa-whatsapp" style="font-size: 18px;"></i> Chat on WhatsApp
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 The Devki Ruiru Senior School. All rights reserved.</div>
+            <div class="motto"><span>Ignite</span> &middot; Your &middot; <span>Future</span></div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/254798593187" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">Chat with Admissions</span>
+    </a>
+
+    <script>
+        // ===== SLIDER =====
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+            dots.forEach((dot, i) => { dot.classList.toggle('active', i === index); });
+        }
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+        }
+
+        setInterval(() => { changeSlide(1); }, 6000);
+
+        // ===== PARTICLES =====
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particle.style.width = (4 + Math.random() * 6) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
+            else { navbar.classList.remove('scrolled'); }
+        });
+
+        // ===== MOBILE MENU =====
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            mobileNavOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        mobileNavOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking a link
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileNav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // ===== SCROLL ANIMATIONS =====
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
+        }, observerOptions);
+        document.querySelectorAll('.animate-on-scroll').forEach(el => { observer.observe(el); });
+
+        // ===== WORD ANIMATION FOR TITLE =====
+        const titleEl = document.getElementById('sectionTitle');
+        const words = titleEl.textContent.split(' ');
+        titleEl.innerHTML = words.map((word, i) => `<span class="word" style="animation-delay: ${i * 0.1}s">${word}</span>`).join(' ');
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.word').forEach(word => { word.style.animationPlayState = 'running'; });
+                }
+            });
+        });
+        titleObserver.observe(titleEl);
+
+        // ===== COUNTER ANIMATION =====
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(entry.target, target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        });
+        document.querySelectorAll('.stat-number').forEach(el => { counterObserver.observe(el); });
+
+        function animateCounter(el, target) {
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target + (target === 95 ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current) + (target === 95 ? '%' : '');
+                }
+            }, 30);
+        }
+    </script>
+</body>
+</html>

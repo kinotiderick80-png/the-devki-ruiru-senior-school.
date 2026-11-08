@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Principal's Message | The Devki Ruiru Senior School</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="Untitled.png">
+<style>
+:root{--primary-red:#c41e3a;--primary-red-dark:#a01830;--dark-brown:#3d1f1f;--darker-brown:#2a1515;--gold:#c9a227;--light-gold:#d4b84a;--text-dark:#1a1a1a;--text-gray:#666;--text-light:#f5f5f5;--bg-cream:#faf8f5;--bg-light:#f0ede8;--bg-white:#ffffff;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;color:var(--text-dark);background:var(--bg-cream);overflow-x:hidden;line-height:1.6}
+
+/* Navbar */
+.navbar{background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000;border-bottom:1px solid rgba(0,0,0,0.05);box-shadow:0 2px 20px rgba(0,0,0,0.04)}
+.nav-container{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;height:72px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-img{height:48px;width:auto;object-fit:contain;transition:transform 0.3s ease}
+.logo:hover .logo-img{transform:scale(1.05)}
+.logo-text h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--text-dark);line-height:1.2}
+.logo-text span{font-size:10px;letter-spacing:3px;color:var(--primary-red);font-weight:600;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;color:var(--text-dark);font-size:14px;font-weight:500;position:relative;padding-bottom:4px;transition:color 0.3s}
+.nav-links a:hover,.nav-links a.active{color:var(--primary-red)}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--primary-red)}
+.btn-primary{background:var(--primary-red);color:white;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:14px;font-weight:600;transition:all 0.3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--primary-red-dark);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--primary-red);padding:12px 28px;border-radius:30px;text-decoration:none;font-size:14px;font-weight:600;transition:all 0.3s;border:1.5px solid var(--primary-red);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{background:var(--primary-red);color:white}
+.btn-dark{background:var(--dark-brown);color:white;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:14px;font-weight:600;transition:all 0.3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-dark:hover{background:var(--darker-brown)}
+.mobile-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1002;position:relative}
+.mobile-menu-btn span{display:block;width:24px;height:2px;background:var(--text-dark);margin:5px 0;transition:all 0.3s ease;border-radius:1px}
+.mobile-menu-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.mobile-menu-btn.active span:nth-child(2){opacity:0}
+.mobile-menu-btn.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:998;opacity:0;visibility:hidden;transition:all 0.3s ease}
+.mobile-nav-overlay.active{opacity:1;visibility:visible}
+.mobile-nav{position:fixed;top:0;right:-100%;width:300px;max-width:85vw;height:100vh;background:white;z-index:999;padding:100px 32px 32px;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:-10px 0 40px rgba(0,0,0,0.15);overflow-y:auto}
+.mobile-nav.active{right:0}
+.mobile-nav ul{list-style:none}
+.mobile-nav ul li{margin-bottom:4px}
+.mobile-nav ul li a{display:block;padding:14px 0;color:var(--text-dark);text-decoration:none;font-size:16px;font-weight:500;border-bottom:1px solid rgba(0,0,0,0.06);transition:all 0.3s}
+.mobile-nav ul li a:hover{color:var(--primary-red);padding-left:8px}
+.mobile-nav .btn-primary{display:flex;justify-content:center;margin-top:20px;width:100%}
+
+/* Hero Section */
+.page-hero{position:relative;min-height:50vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,var(--darker-brown) 0%,var(--dark-brown) 50%,var(--primary-red-dark) 100%)}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.03)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="90" cy="90" r="1" fill="rgba(255,255,255,0.05)"/></svg>');background-size:200px;opacity:0.6}
+.page-hero-content{position:relative;z-index:2;text-align:center;padding:120px 24px 80px;max-width:900px}
+.page-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);padding:8px 20px;border-radius:30px;color:var(--gold);font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;border:1px solid rgba(255,255,255,0.2)}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,64px);color:white;line-height:1.1;margin-bottom:16px}
+.page-hero p{color:rgba(255,255,255,0.8);font-size:18px;max-width:600px;margin:0 auto;line-height:1.6}
+
+/* Principal Profile Section */
+.principal-profile{padding:100px 24px;background:var(--bg-cream)}
+.profile-container{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:400px 1fr;gap:60px;align-items:start}
+.profile-image-wrapper{position:sticky;top:100px}
+.profile-image{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,0.15);background:var(--dark-brown);aspect-ratio:3/4}
+.profile-image img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform 0.5s ease}
+.profile-image:hover img{transform:scale(1.03)}
+.profile-image::before{content:'';position:absolute;inset:0;border:3px solid var(--gold);border-radius:24px;z-index:2;pointer-events:none;opacity:0.3}
+.profile-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(42,21,21,0.8),transparent);z-index:1}
+.profile-caption{position:absolute;bottom:24px;left:24px;right:24px;z-index:3}
+.profile-caption h3{font-family:'Playfair Display',serif;font-size:24px;color:white;margin-bottom:4px}
+.profile-caption span{color:var(--gold);font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.profile-badge{position:absolute;top:24px;right:24px;z-index:3;background:var(--primary-red);color:white;padding:8px 16px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;box-shadow:0 4px 15px rgba(196,30,58,0.4)}
+
+.profile-details{padding-top:20px}
+.profile-label{color:var(--primary-red);font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.profile-label::before{content:'';display:block;width:40px;height:2px;background:var(--primary-red)}
+.profile-details h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);line-height:1.2;margin-bottom:24px;color:var(--text-dark)}
+.profile-details .greeting{color:var(--gold);font-family:'Playfair Display',serif;font-size:20px;font-style:italic;margin-bottom:20px;display:block}
+.message-body{color:var(--text-gray);font-size:16px;line-height:1.9}
+.message-body p{margin-bottom:20px}
+.message-body strong{color:var(--text-dark);font-weight:600}
+.message-body em{color:var(--gold);font-style:italic}
+.highlight-box{background:linear-gradient(135deg,var(--dark-brown),var(--primary-red-dark));border-radius:16px;padding:32px;margin:32px 0;color:white;position:relative;overflow:hidden}
+.highlight-box::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Playfair Display',serif;font-size:120px;color:rgba(255,255,255,0.08);line-height:1}
+.highlight-box p{position:relative;z-index:1;font-family:'Playfair Display',serif;font-size:20px;line-height:1.6;font-style:italic;color:rgba(255,255,255,0.95);margin:0}
+.highlight-box .attribution{margin-top:16px;font-family:'Inter',sans-serif;font-size:14px;font-style:normal;color:var(--gold);letter-spacing:1px;text-transform:uppercase;font-weight:600}
+
+/* Photo Gallery */
+.photo-gallery{padding:80px 24px;background:var(--bg-light)}
+.gallery-container{max-width:1200px;margin:0 auto}
+.gallery-header{text-align:center;margin-bottom:48px}
+.gallery-label{color:var(--primary-red);font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.gallery-header h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);color:var(--text-dark);margin-bottom:12px}
+.gallery-header p{color:var(--text-gray);font-size:16px;max-width:600px;margin:0 auto}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gallery-item{border-radius:16px;overflow:hidden;position:relative;aspect-ratio:4/3;background:var(--dark-brown);cursor:pointer;transition:all 0.4s ease}
+.gallery-item:nth-child(1){grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(42,21,21,0.6),transparent);opacity:0;transition:opacity 0.3s ease}
+.gallery-item:hover::after{opacity:1}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:24px;color:white;z-index:2;transform:translateY(20px);opacity:0;transition:all 0.3s ease}
+.gallery-item:hover .gallery-caption{transform:translateY(0);opacity:1}
+.gallery-caption h4{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:4px}
+.gallery-caption span{font-size:12px;opacity:0.8}
+
+/* Values Section */
+.principal-values{padding:100px 24px;background:var(--bg-cream)}
+.values-container{max-width:1200px;margin:0 auto}
+.values-header{text-align:center;margin-bottom:56px}
+.values-header h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);color:var(--text-dark);margin-bottom:12px}
+.values-header p{color:var(--text-gray);font-size:16px;max-width:600px;margin:0 auto}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.value-card{background:white;border-radius:20px;padding:36px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:all 0.3s ease;border:1px solid rgba(0,0,0,0.04)}
+.value-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.1)}
+.value-icon{width:60px;height:60px;background:linear-gradient(135deg,var(--dark-brown),var(--primary-red));border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:white;font-size:24px;transition:transform 0.3s ease}
+.value-card:hover .value-icon{transform:rotate(10deg) scale(1.1)}
+.value-card h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:10px;color:var(--text-dark)}
+.value-card p{color:var(--text-gray);font-size:14px;line-height:1.6}
+
+/* CTA Section */
+.cta-section{position:relative;padding:100px 24px;background:linear-gradient(135deg,rgba(61,31,31,0.95) 0%,rgba(42,21,21,0.9) 100%),url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80') center/cover;background-attachment:fixed}
+.cta-container{max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);color:white;margin-bottom:16px}
+.cta-section h2 .gold{color:var(--gold)}
+.cta-section p{color:rgba(255,255,255,0.8);font-size:18px;margin-bottom:32px;line-height:1.6}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* Footer */
+.footer{background:var(--darker-brown);color:white;padding:80px 24px 30px}
+.footer-container{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.footer-brand h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px}
+.footer-brand span{color:var(--gold);font-size:11px;letter-spacing:3px;text-transform:uppercase}
+.footer-brand p{color:rgba(255,255,255,0.6);font-size:14px;line-height:1.7;margin:16px 0;max-width:280px}
+.footer-brand .footer-logo-img{height:64px;width:auto;object-fit:contain;margin-bottom:16px;filter:brightness(0) invert(1)}
+.footer-social{display:flex;gap:12px;margin-top:16px}
+.footer-social a{width:36px;height:36px;border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);text-decoration:none;transition:all 0.3s;font-size:14px}
+.footer-social a:hover{background:var(--primary-red);border-color:var(--primary-red);color:white}
+.footer-col h4{color:var(--gold);font-size:16px;margin-bottom:20px;font-family:'Playfair Display',serif}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul li a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:14px;transition:color 0.3s}
+.footer-col ul li a:hover{color:white}
+.footer-contact li{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:14px;list-style:none}
+.footer-contact svg{width:16px;height:16px;fill:var(--primary-red);margin-top:2px;flex-shrink:0}
+.footer-bottom{max-width:1280px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{color:rgba(255,255,255,0.5);font-size:13px}
+.footer-motto{color:var(--gold);font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:600}
+
+/* Animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.8s ease}
+.reveal.active{opacity:1;transform:translateY(0)}
+.animate-left{animation:fadeInLeft 0.8s ease forwards}
+.animate-right{animation:fadeInRight 0.8s ease forwards}
+.animate-scale{animation:scaleIn 0.8s ease forwards}
+.float-icon{animation:float 3s ease-in-out infinite}
+
+/* Responsive */
+@media(max-width:1024px){
+    .profile-container{grid-template-columns:1fr;gap:40px}
+    .profile-image-wrapper{position:relative;top:0}
+    .profile-image{max-width:400px;margin:0 auto}
+    .gallery-grid{grid-template-columns:repeat(2,1fr)}
+    .gallery-item:nth-child(1){grid-column:span 2;grid-row:span 1;aspect-ratio:16/9}
+    .values-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-container{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+    .nav-links{display:none}
+    .mobile-menu-btn{display:block}
+    .page-hero{padding:80px 24px 60px}
+    .page-hero h1{font-size:clamp(28px,8vw,40px)}
+    .principal-profile{padding:60px 16px}
+    .profile-image{max-width:320px;aspect-ratio:1/1}
+    .profile-details h2{font-size:clamp(24px,6vw,32px)}
+    .message-body{font-size:15px}
+    .highlight-box{padding:24px}
+    .highlight-box p{font-size:18px}
+    .photo-gallery{padding:60px 16px}
+    .gallery-grid{grid-template-columns:1fr}
+    .gallery-item:nth-child(1){grid-column:span 1;aspect-ratio:4/3}
+    .principal-values{padding:60px 16px}
+    .values-grid{grid-template-columns:1fr}
+    .cta-section{padding:60px 16px}
+    .cta-buttons{flex-direction:column}
+    .cta-buttons .btn-primary,.cta-buttons .btn-outline{width:100%;justify-content:center}
+    .footer{padding:50px 16px 24px}
+    .footer-container{grid-template-columns:1fr;gap:40px}
+    .footer-bottom{flex-direction:column;gap:12px;text-align:center}
+}
+@media(max-width:480px){
+    .profile-image{max-width:280px}
+    .profile-caption h3{font-size:20px}
+    .gallery-caption h4{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+<div class="nav-container">
+<a href="index.html" class="logo">
+<img src="Untitled.png" alt="The Devki Ruiru Senior School" class="logo-img">
+<div class="logo-text"><h1>The Devki Ruiru</h1><span>Senior School</span></div>
+</a>
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="news.html">News</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="admissions.html" class="btn-primary">Apply Now</a></li>
+</ul>
+<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</div>
+</nav>
+
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="mobile-nav" id="mobileNav">
+<ul>
+<li><a href="index.html" class="mobile-nav-link">Home</a></li>
+<li><a href="about.html" class="mobile-nav-link">About</a></li>
+<li><a href="academics.html" class="mobile-nav-link">Academics</a></li>
+<li><a href="admissions.html" class="mobile-nav-link">Admissions</a></li>
+<li><a href="news.html" class="mobile-nav-link">News</a></li>
+<li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+</ul>
+<a href="admissions.html" class="btn-primary">Apply Now</a>
+</div>
+
+<!-- Page Hero -->
+<section class="page-hero">
+<div class="page-hero-content">
+<div class="page-hero-badge">&#9733; Leadership & Vision</div>
+<h1>Principal's Message</h1>
+<p>Words of welcome, wisdom, and vision from the head of The Devki Ruiru Senior School</p>
+</div>
+</section>
+
+<!-- Principal Profile & Message -->
+<section class="principal-profile">
+<div class="profile-container">
+<div class="profile-image-wrapper reveal">
+<div class="profile-image">
+<img src="principal.png" alt="The Principal of The Devki Ruiru Senior School" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--dark-brown),var(--primary-red-dark))';this.parentElement.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:16px;><div style=font-size:64px;color:var(--gold);>&#9884;</div><div style=color:rgba(255,255,255,0.6);font-size:14px;>Principal Photo</div></div>'">
+<div class="profile-caption">
+<h3>The Principal</h3>
+<span>The Devki Ruiru Senior School</span>
+</div>
+<div class="profile-badge">Principal</div>
+</div>
+</div>
+
+<div class="profile-details reveal">
+<div class="profile-label">Principal's Remarks</div>
+<h2>Karibu to The Devki Ruiru Senior School</h2>
+<span class="greeting">"It is with great joy that I welcome you to our school family."</span>
+
+<div class="message-body">
+<p>It gives me great pleasure to welcome you to <strong>The Devki Ruiru Senior School</strong>, a place where academic excellence meets character, discipline, and purpose. As the Principal, I consider it both a privilege and a profound responsibility to lead this institution in shaping the minds and hearts of Kenya's next generation of leaders.</p>
+
+<p>Our school was founded on the unwavering belief that <strong>every student possesses unique potential</strong> — potential that, when properly nurtured through quality education, mentorship, and spiritual guidance, blossoms into remarkable achievement. Our responsibility as educators and mentors is to identify that potential, cultivate it with care and rigour, and prepare young men and women who are not only competent in the classroom, but also confident, principled, and ready to serve the nation with honour.</p>
+
+<p><strong>Academically</strong>, we are privileged to offer the three CBE Senior School pathways — Arts & Sports Science, Social Sciences, and Science, Technology, Engineering & Mathematics (STEM) — through a vigorous and supportive learning environment. Our dedicated teaching staff, all accredited by the Teachers Service Commission (TSC), work tirelessly to ensure that every learner is prepared to excel in national examinations and beyond. We maintain small class sizes to guarantee individual attention, and our modern laboratories, library, and digital learning resources provide the tools necessary for 21st-century education.</p>
+
+<p><strong>In talent and skills development</strong>, we encourage robust participation across language clubs, mathematics competitions, social subjects symposiums, competitive sports, performing arts, technology and innovation hubs, science fairs, and entrepreneurial initiatives. We believe that education extends far beyond textbooks. Every student deserves the opportunity to discover, develop, and deploy their unique gifts for the benefit of society.</p>
+
+<p><strong>In character formation</strong>, we uphold the timeless values of <em>integrity, respect, hard work, discipline, and servant leadership</em> — values that will guide our students long after they graduate from our gates. Our morning devotions, guidance and counselling programmes, and community service initiatives ensure that our learners grow into God-fearing, socially responsible citizens.</p>
+
+<div class="highlight-box">
+<p>To our students: Dream big, work hard, and stay disciplined. Your future is built on the choices you make today. Remember that excellence is not an act, but a habit.</p>
+<div class="attribution">— The Principal</div>
+</div>
+
+<p><em>To our parents and guardians:</em> Thank you for the tremendous trust you have placed in us by entrusting us with your most precious gift — your children. We do not take this responsibility lightly. We promise to walk alongside you in partnership, maintaining open communication and working collaboratively to raise responsible, resilient, and resourceful citizens.</p>
+
+<p><em>To our teaching and non-teaching staff:</em> Your dedication, professionalism, and love for our students form the very heartbeat of this school. You are the architects of our success story. Let us continue to inspire, mentor, and lead by example, knowing that the seeds we sow today will bear fruit for generations to come.</p>
+
+<p><em>To our Board of Management, the PTA, and our wider community:</em> Your unwavering support, counsel, and resources enable us to pursue excellence without compromise. Together, we form a formidable team committed to one noble cause — the holistic development of every child under our care.</p>
+
+<p>As we look to the future, our strategic vision remains crystal clear: <strong>to raise scholars, leaders, innovators, and patriots</strong> who will make a positive, transformative difference in Kenya and across the world. We are committed to expanding our infrastructure, enhancing our academic programmes, strengthening our co-curricular offerings, and deepening our spiritual foundation.</p>
+
+<p>We are excited to welcome our pioneer Grade 10 students as we fully embrace the Competency-Based Education curriculum. This is a new chapter filled with promise, and we are fully prepared to deliver an education that is learner-centred, skills-focused, and values-driven.</p>
+
+<p>Once again, welcome to The Devki Ruiru Senior School. Whether you are a prospective student, a parent exploring options, a partner seeking collaboration, or a well-wisher visiting our website — <strong>you are part of our story</strong>. Together, we build excellence. Together, we ignite futures.</p>
+
+<p style="margin-top:32px;font-family:'Playfair Display',serif;font-size:18px;color:var(--dark-brown);">God bless you, and God bless The Devki Ruiru Senior School.</p>
+
+<div class="principal-name" style="margin-top:24px;padding-top:24px;border-top:2px solid var(--bg-light);">
+<h4 style="font-family:'Playfair Display',serif;font-size:20px;color:var(--text-dark);margin-bottom:4px;">The Principal</h4>
+<span style="color:var(--text-gray);font-size:14px;">The Devki Ruiru Senior School<br>Ruiru, Kiambu County, Kenya</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Photo Gallery -->
+<section class="photo-gallery">
+<div class="gallery-container">
+<div class="gallery-header reveal">
+<div class="gallery-label">Gallery</div>
+<h2>Moments with Our Principal</h2>
+<p>A glimpse into the leadership, presence, and dedication that guides our school community every day.</p>
+</div>
+<div class="gallery-grid">
+<div class="gallery-item reveal">
+<img src="principal.png" alt="Principal Official Portrait" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--dark-brown),var(--primary-red-dark))'">
+<div class="gallery-caption">
+<h4>Official Portrait</h4>
+<span>School Leadership</span>
+</div>
+</div>
+<div class="gallery-item reveal">
+<img src="school parade.jpeg" alt="Principal at Morning Parade" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--dark-brown),var(--primary-red-dark))'">
+<div class="gallery-caption">
+<h4>Morning Parade</h4>
+<span>Leading with Discipline</span>
+</div>
+</div>
+<div class="gallery-item reveal">
+<img src="win.jpeg" alt="Principal with Students" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--dark-brown),var(--primary-red-dark))'">
+<div class="gallery-caption">
+<h4>With Students</h4>
+<span>Mentoring Future Leaders</span>
+</div>
+</div>
+<div class="gallery-item reveal">
+<img src="winnings.jpeg" alt="Principal in Science Lab" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--dark-brown),var(--primary-red-dark))'">
+<div class="gallery-caption">
+<h4>Academic Excellence</h4>
+<span>Supporting STEM Education</span>
+</div>
+</div>
+<div class="gallery-item reveal">
+<img src="medal.jpeg" alt="Principal at Computer Lab" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--dark-brown),var(--primary-red-dark))'">
+<div class="gallery-caption">
+<h4>Digital Learning</h4>
+<span>21st Century Education</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Principal's Values -->
+<section class="principal-values">
+<div class="values-container">
+<div class="values-header reveal">
+<div class="gallery-label">Leadership Pillars</div>
+<h2>The Principal's Core Commitments</h2>
+<p>Five foundational commitments that guide every decision and initiative at Devki Ruiru.</p>
+</div>
+<div class="values-grid">
+<div class="value-card reveal">
+<div class="value-icon float-icon">&#128218;</div>
+<h3>Academic Rigor</h3>
+<p>Maintaining the highest standards of teaching, learning, and assessment to ensure every student achieves their full intellectual potential.</p>
+</div>
+<div class="value-card reveal">
+<div class="value-icon float-icon" style="animation-delay:0.5s">&#127757;</div>
+<h3>Character Formation</h3>
+<p>Building integrity, discipline, and moral courage in every learner through daily example, mentorship, and values-based education.</p>
+</div>
+<div class="value-card reveal">
+<div class="value-icon float-icon" style="animation-delay:1s">&#128161;</div>
+<h3>Innovation & Skills</h3>
+<p>Embracing the CBE curriculum and modern technology to prepare students for careers that do not yet exist in our rapidly changing world.</p>
+</div>
+<div class="value-card reveal">
+<div class="value-icon float-icon" style="animation-delay:1.5s">&#129309;</div>
+<h3>Community Partnership</h3>
+<p>Fostering strong collaboration between parents, teachers, and the wider community to create a supportive ecosystem for every child.</p>
+</div>
+<div class="value-card reveal">
+<div class="value-icon float-icon" style="animation-delay:2s">&#128330;</div>
+<h3>Spiritual Growth</h3>
+<p>Nurturing God-fearing citizens who lead with compassion, serve with humility, and live with purpose and faith.</p>
+</div>
+<div class="value-card reveal">
+<div class="value-icon float-icon" style="animation-delay:2.5s">&#127942;</div>
+<h3>Excellence in All</h3>
+<p>Pursuing distinction not only in academics but in sports, arts, leadership, and service to humanity.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+<div class="cta-container">
+<h2 class="reveal">Experience the <span class="gold">Devki</span> difference.</h2>
+<p class="reveal">Join a school community where every learner is known, loved, and challenged to rise to their highest calling.</p>
+<div class="cta-buttons reveal">
+<a href="admissions.html" class="btn-primary">Apply for 2026 Intake</a>
+<a href="contact.html" class="btn-outline">Book a Campus Visit</a>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+<div class="footer-container">
+<div class="footer-brand reveal">
+<img src="Untitled.png" alt="The Devki Ruiru Senior School" class="footer-logo-img">
+<h3>Devki Ruiru</h3>
+<span>Senior School</span>
+<p>Nurturing tomorrow's leaders through faith, discipline, and academic excellence since our founding.</p>
+<div class="footer-social">
+<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">&#128247;</a>
+<a href="https://x.com" target="_blank" rel="noopener" aria-label="X">&#120143;</a>
+</div>
+</div>
+<div class="footer-col reveal">
+<h4>Explore</h4>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="academics.html">Academics</a></li>
+<li><a href="admissions.html">Admissions</a></li>
+<li><a href="news.html">News & Events</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col reveal">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="index.html#principal">Principal's Message</a></li>
+<li><a href="index.html#values">Core Values</a></li>
+<li><a href="academics.html">CBE Pathways</a></li>
+<li><a href="admissions.html">Fee Structure</a></li>
+<li><a href="news.html">Calendar</a></li>
+</ul>
+</div>
+<div class="footer-col reveal">
+<h4>Contact</h4>
+<ul class="footer-contact">
+<li><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><strong>The Devki Ruiru Senior School</strong><br>Ruiru, Kiambu County, Kenya<br><small style="color:var(--gold)">Along Ruiru-Kamiti Road</small></li>
+<li><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>+254 798593187</li>
+<li><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>devkiruirusecexam1@gmail.com</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 The Devki Ruiru Senior School. All rights reserved.</p>
+<span class="footer-motto">Ignite &middot; Your &middot; Future</span>
+</div>
+</footer>
+
+<script>
+// Mobile Menu
+const mobileMenuBtn=document.getElementById('mobileMenuBtn');
+const mobileNav=document.getElementById('mobileNav');
+const mobileNavOverlay=document.getElementById('mobileNavOverlay');
+const mobileNavLinks=document.querySelectorAll('.mobile-nav-link');
+
+function openMobileMenu(){
+    mobileMenuBtn.classList.add('active');
+    mobileNav.classList.add('active');
+    mobileNavOverlay.classList.add('active');
+    document.body.style.overflow='hidden';
+}
+function closeMobileMenu(){
+    mobileMenuBtn.classList.remove('active');
+    mobileNav.classList.remove('active');
+    mobileNavOverlay.classList.remove('active');
+    document.body.style.overflow='';
+}
+mobileMenuBtn.addEventListener('click',function(){
+    if(mobileNav.classList.contains('active')){closeMobileMenu();}else{openMobileMenu();}
+});
+mobileNavOverlay.addEventListener('click',closeMobileMenu);
+mobileNavLinks.forEach(function(link){link.addEventListener('click',closeMobileMenu);});
+
+// Scroll Reveal
+const revealOptions={threshold:0.1,rootMargin:'0px 0px -50px 0px'};
+const revealObserver=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+        if(entry.isIntersecting){entry.target.classList.add('active');}
+    });
+},revealOptions);
+document.querySelectorAll('.reveal').forEach(function(el){revealObserver.observe(el);});
+
+// Smooth Scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
+    anchor.addEventListener('click',function(e){
+        e.preventDefault();
+        const target=document.querySelector(this.getAttribute('href'));
+        if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+});
+</script>
+</body>
+</html>

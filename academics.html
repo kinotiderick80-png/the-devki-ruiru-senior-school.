@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academics — The Devki Ruiru Senior School</title>
+  <link rel="icon" type="image/png" href="Untitled.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --maroon: #7B1F2A;
+      --maroon-dark: #5A1620;
+      --gold: #C9A84C;
+      --gold-light: #E8D5A3;
+      --cream: #F5F0EB;
+      --cream-dark: #EBE5DE;
+      --brown: #3D2314;
+      --brown-light: #5C3A2A;
+      --text-dark: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: var(--brown);
+      color: var(--gold-light);
+      padding: 8px 0;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    .top-bar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-bar-left { display: flex; gap: 24px; align-items: center; }
+    .top-bar-left span { display: flex; align-items: center; gap: 6px; }
+    .top-bar-left svg { width: 14px; height: 14px; }
+    .top-bar-right {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: box-shadow 0.3s ease;
+    }
+    .navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .navbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 52px; height: 52px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--white);
+      border: 2px solid var(--maroon);
+    }
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text .school-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .logo-text .school-type {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      font-weight: 600;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover { color: var(--maroon); }
+    .nav-links a.active {
+      color: var(--maroon);
+      font-weight: 600;
+    }
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--maroon);
+      border-radius: 1px;
+    }
+    .apply-btn {
+      background: var(--maroon);
+      color: var(--white);
+      padding: 10px 24px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid var(--maroon);
+    }
+    .apply-btn:hover {
+      background: transparent;
+      color: var(--maroon);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(123,31,42,0.2);
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 101;
+      background: none;
+      border: none;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--maroon);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile Nav Overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 80px 24px 24px;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mobile-nav.open {
+      transform: translateX(0);
+    }
+    .mobile-nav a {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-align: center;
+    }
+    .mobile-nav a:hover {
+      background: var(--cream-dark);
+      color: var(--maroon);
+    }
+    .mobile-nav a.active {
+      color: var(--maroon);
+      background: rgba(123,31,42,0.08);
+    }
+    .mobile-nav .apply-btn-mobile {
+      background: var(--maroon);
+      color: var(--white);
+      padding: 14px 40px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+
+    /* Hero Carousel */
+    .hero {
+      position: relative;
+      height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .hero-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .hero-slide-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.4);
+      transform: scale(1.05);
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom {
+      0% { transform: scale(1.05); }
+      100% { transform: scale(1.15); }
+    }
+    .hero-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(61,35,20,0.88) 0%, rgba(61,35,20,0.5) 50%, rgba(61,35,20,0.2) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+    .hero-label {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      max-width: 650px;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      max-width: 520px;
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+    .hero-subjects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+      max-width: 600px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards 0.9s;
+    }
+    .hero-subject-tag {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.3s ease;
+    }
+    .hero-subject-tag:hover {
+      background: rgba(201,168,76,0.25);
+      border-color: var(--gold);
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Carousel Controls */
+    .carousel-dots {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 3;
+    }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .carousel-dot.active {
+      background: var(--gold);
+      width: 32px;
+      border-radius: 5px;
+    }
+    .carousel-arrows {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 24px;
+      pointer-events: none;
+    }
+    .carousel-arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      pointer-events: all;
+    }
+    .carousel-arrow:hover {
+      background: rgba(201,168,76,0.3);
+      border-color: var(--gold);
+    }
+
+    /* Cards Section */
+    .cards-section {
+      max-width: 1280px;
+      margin: -60px auto 0;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 3;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: 1px solid transparent;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      border-color: rgba(123,31,42,0.15);
+    }
+    .card-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--brown) 0%, var(--maroon) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--gold-light);
+      font-size: 22px;
+      transition: transform 0.3s ease;
+    }
+    .card:hover .card-icon { transform: scale(1.1) rotate(-5deg); }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .card-desc .highlight {
+      color: var(--maroon);
+      font-weight: 500;
+    }
+
+    /* Hands-On Section */
+    .hands-on {
+      background: var(--cream-dark);
+      padding: 100px 0;
+      overflow: hidden;
+    }
+    .hands-on-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hands-on-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.8s ease;
+    }
+    .hands-on-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .hands-on-label {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .hands-on-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hands-on-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .hands-on-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hands-on-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+    .hands-on-list li::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--maroon);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hands-on-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.8s ease 0.2s;
+    }
+    .hands-on-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .hands-on-img {
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .hands-on-img img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .hands-on-img:hover img { transform: scale(1.05); }
+    .hands-on-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(61,35,20,0.3) 100%);
+      border-radius: 20px;
+    }
+
+    /* Practical Showcase Section */
+    .practical-showcase {
+      background: var(--white);
+      padding: 100px 0;
+    }
+    .practical-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .practical-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .practical-label {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .practical-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .practical-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .practical-card {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      height: 320px;
+      cursor: pointer;
+    }
+    .practical-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .practical-card:hover img { transform: scale(1.1); }
+    .practical-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(61,35,20,0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    .practical-card:hover .practical-card-overlay {
+      background: linear-gradient(180deg, transparent 10%, rgba(123,31,42,0.9) 100%);
+    }
+    .practical-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .practical-card-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--brown);
+      color: var(--cream);
+      padding: 64px 0 24px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .logo-text .school-name { color: var(--white); }
+    .footer-brand .logo-text .school-type { color: var(--gold); }
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 260px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .footer-social a {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+    .footer-social a:hover {
+      background: var(--maroon);
+      border-color: var(--maroon);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--gold);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-col ul li a:hover {
+      color: var(--gold);
+      padding-left: 4px;
+    }
+    .footer-col ul li a .dot {
+      width: 4px; height: 4px;
+      background: var(--maroon);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-contact-item svg {
+      width: 16px; height: 16px;
+      color: var(--maroon);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-bottom .motto {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Mobile */
+    @media (max-width: 1024px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .hands-on-inner { grid-template-columns: 1fr; gap: 40px; }
+      .practical-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: repeat(2, 1fr); }
+      .hero-title { font-size: 42px; }
+    }
+    @media (max-width: 768px) {
+      .hero { height: 500px; }
+      .hero-title { font-size: 32px; }
+      .hero-desc { font-size: 14px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .practical-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .apply-btn { display: none; }
+      .menu-toggle { display: flex; }
+      .mobile-nav { display: flex; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .carousel-arrows { display: none; }
+      .practical-card { height: 260px; }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--maroon); border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +254 740 618 812
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          devkiruirusecexam1@gmail.com
+        </span>
+      </div>
+      <div class="top-bar-right">Motto — Ignite Your Future</div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <img src="Untitled.png" alt="Devki Ruiru School Logo">
+        </div>
+        <div class="logo-text">
+          <span class="school-name">The Devki Ruiru</span>
+          <span class="school-type">Senior School</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="academics.html" class="active">Academics</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="admissions.html" class="apply-btn">Apply Now</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="academics.html" class="active">Academics</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="news.html">News</a>
+    <a href="contact.html">Contact</a>
+    <a href="admissions.html" class="apply-btn-mobile">Apply Now</a>
+  </div>
+
+  <!-- Hero Carousel -->
+  <section class="hero" id="heroCarousel">
+    <div class="hero-slides" id="heroSlides">
+      <!-- Slide 1: STEM -->
+      <div class="hero-slide">
+        <div class="hero-slide-bg" style="background-image: url('labprac.jpeg');"></div>
+        <div class="hero-slide-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-label">STEM Pathway</div>
+          <h1 class="hero-title">Science, Technology, Engineering & Mathematics</h1>
+          <p class="hero-desc">Explore Physics, Chemistry, Biology, Advanced Mathematics, Computer Science, Agriculture, and Technical subjects in our modern laboratories.</p>
+          <div class="hero-subjects">
+            <span class="hero-subject-tag">Physics</span>
+            <span class="hero-subject-tag">Chemistry</span>
+            <span class="hero-subject-tag">Biology</span>
+            <span class="hero-subject-tag">Mathematics</span>
+            <span class="hero-subject-tag">Computer Science</span>
+            <span class="hero-subject-tag">Agriculture</span>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2: Social Sciences -->
+      <div class="hero-slide">
+        <div class="hero-slide-bg" style="background-image: url('school\ parade.jpeg');"></div>
+        <div class="hero-slide-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-label">Social Sciences Pathway</div>
+          <h1 class="hero-title">Humanities, Business & Languages</h1>
+          <p class="hero-desc">Develop critical thinking through History, Geography, Business Studies, CRE, Literature, and multiple languages including  Mandarin.</p>
+          <div class="hero-subjects">
+            <span class="hero-subject-tag">Business Studies</span>
+            <span class="hero-subject-tag">History</span>
+            <span class="hero-subject-tag">Geography</span>
+            <span class="hero-subject-tag">CRE</span>
+            <span class="hero-subject-tag">Literature</span>
+  
+          </div>
+        </div>
+      </div>
+      <!-- Slide 3: Arts & Sports -->
+      <div class="hero-slide">
+        <div class="hero-slide-bg" style="background-image: url('https://kimi-web-img.moonshot.cn/img/nation.africa/c0b7d97a29634d335cf55444f6d81433cf04edc2.jpg');"></div>
+        <div class="hero-slide-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-label">Arts & Sports Science</div>
+          <h1 class="hero-title">Music, Dance,  Fine Arts & Sports</h1>
+          <p class="hero-desc">Nurture your creative talents and athletic potential through Music & Dance,  Fine Arts, and Sports & Recreation programs.</p>
+          <div class="hero-subjects">
+            <span class="hero-subject-tag">Music & Dance</span>
+            
+            <span class="hero-subject-tag">Fine Arts</span>
+            <span class="hero-subject-tag">Sports Science</span>
+            <span class="hero-subject-tag">Physical Education</span>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 4: Practical Subjects -->
+      <div class="hero-slide">
+        <div class="hero-slide-bg" style="background-image: url('aviation.jpeg');"></div>
+        <div class="hero-slide-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-label">Practical Subjects</div>
+          <h1 class="hero-title">Hands-On Skills for Real-World Impact</h1>
+          <p class="hero-desc">Gain practical expertise in Building & Construction, Electricity, Power Mechanics, Woodwork, Aviation, Home Science and more.</p>
+          <div class="hero-subjects">
+            <span class="hero-subject-tag">Building & Construction</span>
+            <span class="hero-subject-tag">Electricity</span>
+            <span class="hero-subject-tag">Power Mechanics</span>
+            <span class="hero-subject-tag">Woodwork</span>
+           
+            <span class="hero-subject-tag">Aviation</span>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 5: ICT & Digital -->
+      <div class="hero-slide">
+        <div class="hero-slide-bg" style="background-image: url('comp.jpeg');"></div>
+        <div class="hero-slide-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-label">ICT & Digital Skills</div>
+          <h1 class="hero-title">Digital Literacy for the Modern World</h1>
+          <p class="hero-desc">Master ICT Skills, Computer Studies, and digital competencies essential for the 21st century in our well-equipped computer laboratories.</p>
+          <div class="hero-subjects">
+            <span class="hero-subject-tag">ICT Skills</span>
+            <span class="hero-subject-tag">Computer Science</span>
+            <span class="hero-subject-tag">Digital Literacy</span>
+            <span class="hero-subject-tag">Coding</span>
+            <span class="hero-subject-tag">Data Skills</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <div class="carousel-dots" id="carouselDots"></div>
+    <div class="carousel-arrows">
+      <button class="carousel-arrow" id="prevSlide" aria-label="Previous slide">&#10094;</button>
+      <button class="carousel-arrow" id="nextSlide" aria-label="Next slide">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="cards-section">
+    <div class="cards-grid">
+      <div class="card" data-delay="0">
+        <div class="card-icon">&#128218;</div>
+        <h3 class="card-title">Core Subjects</h3>
+        <p class="card-desc"><span class="highlight">English</span>, <span class="highlight">Basic Mathematics</span>, <span class="highlight">Kiswahili</span>, <span class="highlight">Physical Education</span>, <span class="highlight">ICT Skills</span>, Pastoral Instruction Program.</p>
+      </div>
+      <div class="card" data-delay="100">
+        <div class="card-icon">&#128483;</div>
+        <h3 class="card-title">Languages & Literature</h3>
+        <p class="card-desc"><span class="highlight">English</span>, <span class="highlight">Literature in English</span>, <span class="highlight">, </span>, Kiswahili, <span class="highlight">Fasihi ya Kiswahili</span>,  <span class="highlight">Mandarin/Chinese</span>, </p>
+      </div>
+      <div class="card" data-delay="200">
+        <div class="card-icon">&#127757;</div>
+        <h3 class="card-title">Humanities & Business Studies</h3>
+        <p class="card-desc"><span class="highlight">Christian Religious Education (CRE)</span>, <span class="highlight">Community Service Learning (CSL)</span>, <span class="highlight">Business Studies</span>, <span class="highlight">History & Citizenship</span>, <span class="highlight">Geography</span>.</p>
+      </div>
+      <div class="card" data-delay="300">
+        <div class="card-icon">&#127917;</div>
+        <h3 class="card-title">Arts and Sports Science</h3>
+        <p class="card-desc"><strong>Sports Science:</strong> <span class="highlight">Sports and Recreation</span>, <span class="highlight">Physical Education</span>.<br><strong>Arts:</strong> <span class="highlight">Music and Dance</span>,  <span class="highlight">Fine Arts</span>.</p>
+      </div>
+      <div class="card" data-delay="400">
+        <div class="card-icon">&#128300;</div>
+        <h3 class="card-title">STEM — Pure Sciences</h3>
+        <p class="card-desc"><span class="highlight">Physics</span>, <span class="highlight">Chemistry</span>, <span class="highlight">Biology</span>, <span class="highlight">Mathematics</span>, <span class="highlight">General Science</span>.</p>
+      </div>
+      <div class="card" data-delay="500">
+        <div class="card-icon">&#9881;</div>
+        <h3 class="card-title">STEM — Applied & Technical</h3>
+        <p class="card-desc"><strong>Applied Sciences:</strong> <span class="highlight">Agriculture</span>, <span class="highlight">Computer Science</span>, <span class="highlight">Home Science</span>.<br><strong>Technical:</strong> <span class="highlight">Building & Construction</span>, <span class="highlight">Electricity</span>, <span class="highlight">Power Mechanics</span>, <span class="highlight">Woodwork</span>, <span class="highlight">Aviation</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hands-On Learning -->
+  <section class="hands-on">
+    <div class="hands-on-inner">
+      <div class="hands-on-left" id="handsOnLeft">
+        <div class="hands-on-label">Hands-On Learning</div>
+        <h2 class="hands-on-title">Where theory meets real life.</h2>
+        <p class="hands-on-desc">From the physics lab powering a solar rig to community-based projects, our learners don't just read about the world — they help build it. Every subject is anchored in inquiry, creativity and service.</p>
+        <ul class="hands-on-list">
+          <li>Modern science laboratories</li>
+          <li>Well-stocked library & digital resources</li>
+          <li>Individual academic mentorship</li>
+          <li>Weekly enrichment & clubs</li>
+        </ul>
+      </div>
+      <div class="hands-on-right" id="handsOnRight">
+        <div class="hands-on-img">
+          <img src="mechanics.jpeg" alt="Students in science lab">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practical Showcase -->
+  <section class="practical-showcase">
+    <div class="practical-inner">
+      <div class="practical-header">
+        <div class="practical-label">Practical Learning</div>
+        <h2 class="practical-title">Learning by Doing</h2>
+      </div>
+      <div class="practical-grid">
+        <div class="practical-card">
+          <img src="LABpYSICS PROJECT.jpeg" alt="Science Lab">
+          <div class="practical-card-overlay">
+            <h3 class="practical-card-title">Science Laboratory</h3>
+            <p class="practical-card-desc">Hands-on experiments in Physics, Chemistry & Biology</p>
+          </div>
+        </div>
+        <div class="practical-card">
+          <img src="comp.jpeg" alt="Computer Lab">
+          <div class="practical-card-overlay">
+            <h3 class="practical-card-title">Computer Laboratory</h3>
+            <p class="practical-card-desc">ICT Skills, Coding & Digital Literacy</p>
+          </div>
+        </div>
+        <div class="practical-card">
+          <img src="https://kimi-web-img.moonshot.cn/img/practicalaction.org/fb62d04213277c1c60a336d33867ab4e2be87230.jpg" alt="Agriculture">
+          <div class="practical-card-overlay">
+            <h3 class="practical-card-title">Agriculture & Farm</h3>
+            <p class="practical-card-desc">Sustainable farming & crop management</p>
+          </div>
+        </div>
+        <div class="practical-card">
+          <img src="cu p&w.jpeg" alt="Arts & Culture">
+          <div class="practical-card-overlay">
+            <h3 class="practical-card-title">Christian Union (C.U.)</h3>
+            <p class="practical-card-desc">Worship, Fellowship & Spiritual Development</p>
+          </div>
+        </div>
+        <div class="practical-card">
+          <img src="electricity.jpeg" alt="Technical Workshop">
+          <div class="practical-card-overlay">
+            <h3 class="practical-card-title">Technical Workshop</h3>
+            <p class="practical-card-desc">Building, Woodwork, Metalwork & Electricity</p>
+          </div>
+        </div>
+        <div class="practical-card">
+          <img src="players.jpeg">
+          <div class="practical-card-overlay">
+            <h3 class="practical-card-title">Sports & Athletics</h3>
+            <p class="practical-card-desc">Physical Education & competitive sports</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <img src="Untitled.png" alt="Devki Ruiru School Logo">
+          </div>
+          <div class="logo-text">
+            <span class="school-name">Devki Ruiru</span>
+            <span class="school-type">Senior School</span>
+          </div>
+        </a>
+        <p>Nurturing tomorrow's leaders through faith, discipline, and academic excellence.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">&#128247;</a>
+          <a href="#" aria-label="Twitter">&#128038;</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html"><span class="dot"></span>About Us</a></li>
+          <li><a href="academics.html"><span class="dot"></span>Academics</a></li>
+          <li><a href="admissions.html"><span class="dot"></span>Admissions</a></li>
+          <li><a href="news.html"><span class="dot"></span>News & Events</a></li>
+          <li><a href="contact.html"><span class="dot"></span>Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Core Values</h4>
+        <ul>
+          <li><a href="#"><span class="dot"></span>God Fearing</a></li>
+          <li><a href="#"><span class="dot"></span>Integrity</a></li>
+          <li><a href="#"><span class="dot"></span>Discipline</a></li>
+          <li><a href="#"><span class="dot"></span>Peace</a></li>
+          <li><a href="#"><span class="dot"></span>Hard Work</a></li>
+          <li><a href="#"><span class="dot"></span>Collaboration</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Ruiru, Kiambu County, Kenya
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +254 740 618 812
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          devkiruirusecexam1@gmail.com
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 The Devki Ruiru Senior School. All rights reserved.</p>
+      <span class="motto">Ignite &middot; Your &middot; Future</span>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Close mobile nav when clicking a link
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Hero Carousel
+    const heroSlides = document.getElementById('heroSlides');
+    const slides = heroSlides.querySelectorAll('.hero-slide');
+    const dotsContainer = document.getElementById('carouselDots');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    let currentSlide = 0;
+    let autoScrollInterval;
+    const autoScrollDelay = 5000; // 5 seconds
+
+    // Create dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+    function goToSlide(index) {
+      currentSlide = index;
+      heroSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+      resetAutoScroll();
+    }
+
+    function nextSlide() {
+      goToSlide((currentSlide + 1) % slides.length);
+    }
+
+    function prevSlide() {
+      goToSlide((currentSlide - 1 + slides.length) % slides.length);
+    }
+
+    function startAutoScroll() {
+      autoScrollInterval = setInterval(nextSlide, autoScrollDelay);
+    }
+
+    function resetAutoScroll() {
+      clearInterval(autoScrollInterval);
+      startAutoScroll();
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    // Pause on hover
+    const heroCarousel = document.getElementById('heroCarousel');
+    heroCarousel.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+    heroCarousel.addEventListener('mouseleave', startAutoScroll);
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    heroCarousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      clearInterval(autoScrollInterval);
+    }, { passive: true });
+
+    heroCarousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      startAutoScroll();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }
+
+    // Start auto-scroll
+    startAutoScroll();
+
+    // Intersection Observer for card animations
+    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.delay || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card').forEach(card => cardObserver.observe(card));
+
+    // Hands-on section observer
+    const handsOnLeft = document.getElementById('handsOnLeft');
+    const handsOnRight = document.getElementById('handsOnRight');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sectionObserver.observe(handsOnLeft);
+    sectionObserver.observe(handsOnRight);
+
+    // Practical cards animation
+    const practicalCards = document.querySelectorAll('.practical-card');
+    const practicalObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+          practicalObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    practicalCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s ease';
+      practicalObserver.observe(card);
+    });
+  </script>
+
+</body>
+</html>
